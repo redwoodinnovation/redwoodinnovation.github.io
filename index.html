@@ -1,0 +1,61 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
+<!-- Create an element where the map will take place -->
+<svg id="my_dataviz" width="1600" height="4000"></svg>
+
+<script>
+
+// Svg
+var svg = d3.select("svg"),
+  width = +svg.attr("width"),
+  height = +svg.attr("height");
+
+// Map, projection, and centerpoint
+var path = d3.geoPath();
+var projection = d3.geoMercator()
+  .scale(59799950)
+  .center([-122.29576905,37.890256])
+  .translate([width / 3, height / 12]);
+
+// Data and color scale
+var data = d3.map();
+var colorScale = d3.scaleThreshold()
+  .domain([200, 216, 232, 248, 264, 280, 296, 312, 328, 344, 360, 376, 392, 408, 424, 440, 456, 472, 488, 504, 520, 536, 552, 568, 584, 600, 616, 632, 648, 664, 680, 696, 712, 728, 744, 760, 776, 792, 808, 824, 840, 856, 872, 888, 904, 920, 936, 952, 968, 984, 1000, 1016, 1032, 1048, 1064, 1080, 1096, 1112, 1128, 1144, 1160, 1176, 1192, 1208, 1224, 1240, 1256, 1272, 1288, 1304, 1320, 1336, 1352, 1368, 1384, 1400, 1416, 1432, 1448, 1464, 1480, 1496, 1512, 1528, 1544, 1560, 1576, 1592, 1608, 1624, 1640, 1656, 1672, 1688, 1704, 1720, 1736, 1752, 1768, 1784, 1800])
+  .range(['#000000', '#070007', '#130015', '#200025', '#2f0035', '#340040', '#41004b', '#520060', '#5d006b', '#630072', '#700075', '#750080', '#7a008b', '#7c008d', '#7d008e', '#7f0090', '#810092', '#850096', '#870098', '#6d009c', '#58009f', '#3800a3', '#2300a6', '#0300aa', '#0000b1', '#0000bd', '#0000c9', '#0000d1', '#0000dd', '#0013dd', '#002fdd', '#0041dd', '#005ddd', '#0078dd', '#007ddd', '#0085dd', '#008add', '#0098dd', '#009fcb', '#00a7b3', '#00aaa3', '#00aa95', '#00aa88', '#00a353', '#009d1d', '#009f00', '#00ac00', '#00bc00', '#00ca00', '#00d700', '#00e400', '#00f200', '#00ff00', '#49ff00', '#93ff00', '#bcff00', '#c4fc00', '#d0f800', '#dcf400', '#e4f100', '#efed00', '#f1e700', '#f5df00', '#f8da00', '#fcd200', '#ffc900', '#ffc100', '#ffb500', '#ffad00', '#ffad00', '#ff9900', '#ff7500', '#ff5d00', '#ff3900', '#ff1500', '#ff0000', '#ff040a', '#ff0915', '#ff0d1f', '#ff1229', '#ff1736', '#ff1b40', '#ff214d', '#ff275b', '#ff2d69', '#ff3376', '#ff3882', '#ff3093', '#ff29a4', '#ff21b6', '#ff19cb', '#ff11d9', '#ff09eb', '#ff00ff', '#fe26fe', '#fd4cfd', '#fc72fc', '#fb92fb', '#fbaafb', '#fac9fa', '#ffdeff']);
+
+// Load external data and boot
+d3.queue()
+  .defer(d3.json, "rooms.geojson")
+  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/gviz/tq?tqx=out:csv", function(d) { data.set(d.roomid, +d.co2ppm); })
+  .await(ready);
+
+function ready(error, topo) {
+
+// Draw the map
+svg.append("g")
+  .selectAll("path")
+  .data(topo.features)
+  .enter()
+  .append("path")
+    // draw each room
+    .attr("d", d3.geoPath()
+      .projection(projection)
+    )
+    // set the color of the room outline
+    .attr("stroke","grey")
+    .attr("stroke-width",1)
+    // set the color of each room
+    .attr("fill", function (d) {
+      d.total = data.get(d.id) || 0;
+      return colorScale(d.total);
+    });
+  }
+
+</script>
