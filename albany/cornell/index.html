@@ -33,7 +33,7 @@ var colorScale = d3.scaleThreshold()
 // Load external data and boot
 d3.queue()
   .defer(d3.json, "rooms.geojson")
-  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/gviz/tq?tqx=out:csv", function(d) { data.set(d.roomid, +d.co2ppm); })
+  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.roomid, +d.co2ppm); })
   .await(ready);
 
 function ready(error, topo) {
