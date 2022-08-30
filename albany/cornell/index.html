@@ -8,7 +8,7 @@
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
 <!-- Create an element where the map will take place -->
-<svg id="my_dataviz" width="1600" height="4000"></svg>
+<svg id="my_dataviz" width="1200" height="900"></svg>
 
 <script>
 
@@ -20,9 +20,9 @@ var svg = d3.select("svg"),
 // Map, projection, and centerpoint
 var path = d3.geoPath();
 var projection = d3.geoMercator()
-  .scale(59799950)
+  .scale(21000000)
   .center([-122.29576905,37.890256])
-  .translate([width / 3, height / 12]);
+  .translate([width / 3, height / 10]);
 
 // Data and color scale
 var data = d3.map();
@@ -33,7 +33,7 @@ var colorScale = d3.scaleThreshold()
 // Load external data and boot
 d3.queue()
   .defer(d3.json, "rooms.geojson")
-  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/gviz/tq?tqx=out:csv", function(d) { data.set(d.roomid, +d.co2ppm); })
+  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.roomid, +d.co2ppm); })
   .await(ready);
 
 function ready(error, topo) {
