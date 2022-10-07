@@ -3690,14 +3690,6 @@
         },
         {
             "type": "Feature",
-            "properties": {
-                "fill": "#312E81",
-                "stroke": "#312E81",
-                "fill-opacity": 1,
-                "stroke-width": 1,
-                "stroke-opacity": 1,
-                "RoomNumber": "ELV"
-            },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
@@ -3724,7 +3716,16 @@
                         ]
                     ]
                 ]
-            }
+            },
+            "properties": {
+                "fill": "#312E81",
+                "stroke": "#312E81",
+                "fill-opacity": 1,
+                "stroke-width": 1,
+                "stroke-opacity": 1,
+                "RoomNumber": "ELV"
+            },
+            "id": 71
         }
     ]
 }
