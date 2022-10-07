@@ -34,7 +34,7 @@ var colorScale = d3.scaleThreshold()
 d3.queue()
   .defer(d3.json, "rooms.geojson")
   // .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7Pfesayb3ZWqTwZC_tRmkTd_Q4xOb1LEumaloOSByqkxR_bCY5duYzvVfn8DuupaORpeKQ64zHzHR/pub?output=csv", function(d) { data.set(d.node_id, +d.co2_dry_sync); })
-  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.roomid, +d.co2ppm); })
+  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.RoomNumber, +d.co2ppm); })
   .await(ready);
 
 function ready(error, topo) {
