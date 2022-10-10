@@ -292,135 +292,168 @@
                     [
                         [
                             -122.2959958,
-                            37.8901221
+                            37.8901221,
+                            0
                         ],
                         [
                             -122.2957454,
-                            37.890173
+                            37.890173,
+                            0
                         ],
                         [
                             -122.2957392,
-                            37.8901543
+                            37.8901543,
+                            0
                         ],
                         [
                             -122.2957593,
-                            37.8901502
+                            37.8901502,
+                            0
                         ],
                         [
                             -122.2957518,
-                            37.8901268
+                            37.8901268,
+                            0
                         ],
                         [
                             -122.2954135,
-                            37.8901954
+                            37.8901954,
+                            0
                         ],
                         [
                             -122.295373,
-                            37.890071
+                            37.890071,
+                            0
                         ],
                         [
                             -122.2954139,
-                            37.8900626
+                            37.8900626,
+                            0
                         ],
                         [
                             -122.2954185,
-                            37.8900765
+                            37.8900765,
+                            0
                         ],
                         [
                             -122.2954711,
-                            37.8900658
+                            37.8900658,
+                            0
                         ],
                         [
                             -122.2953988,
-                            37.889845
+                            37.889845,
+                            0
                         ],
                         [
                             -122.295379,
-                            37.8898489
+                            37.8898489,
+                            0
                         ],
                         [
                             -122.2953718,
-                            37.8898277
+                            37.8898277,
+                            0
                         ],
                         [
                             -122.2952861,
-                            37.8898452
+                            37.8898452,
+                            0
                         ],
                         [
                             -122.2952499,
-                            37.8897353
+                            37.8897353,
+                            0
                         ],
                         [
                             -122.2952751,
-                            37.8897302
+                            37.8897302,
+                            0
                         ],
                         [
                             -122.2952074,
-                            37.8895225
+                            37.8895225,
+                            0
                         ],
                         [
                             -122.2953973,
-                            37.8894837
+                            37.8894837,
+                            0
                         ],
                         [
                             -122.2954069,
-                            37.8895119
+                            37.8895119,
+                            0
                         ],
                         [
                             -122.2954581,
-                            37.8895016
+                            37.8895016,
+                            0
                         ],
                         [
                             -122.2954776,
-                            37.8895603
+                            37.8895603,
+                            0
                         ],
                         [
                             -122.2954266,
-                            37.8895702
+                            37.8895702,
+                            0
                         ],
                         [
                             -122.2954987,
-                            37.8897915
+                            37.8897915,
+                            0
                         ],
                         [
                             -122.295502,
-                            37.8897907
+                            37.8897907,
+                            0
                         ],
                         [
                             -122.2955129,
-                            37.8898242
+                            37.8898242,
+                            0
                         ],
                         [
                             -122.295536,
-                            37.8898195
+                            37.8898195,
+                            0
                         ],
                         [
                             -122.2955981,
-                            37.8900103
+                            37.8900103,
+                            0
                         ],
                         [
                             -122.2955761,
-                            37.8900149
+                            37.8900149,
+                            0
                         ],
                         [
                             -122.2955847,
-                            37.8900411
+                            37.8900411,
+                            0
                         ],
                         [
                             -122.2956033,
-                            37.8900373
+                            37.8900373,
+                            0
                         ],
                         [
                             -122.2956038,
-                            37.8900389
+                            37.8900389,
+                            0
                         ],
                         [
                             -122.2959458,
-                            37.8899692
+                            37.8899692,
+                            0
                         ],
                         [
                             -122.2959958,
-                            37.8901221
+                            37.8901221,
+                            0
                         ]
                     ]
                 ]
@@ -431,9 +464,9 @@
                 "fill-opacity": 1,
                 "stroke-width": 1,
                 "stroke-opacity": 1,
-                "RoomNumber": "PROP"
+                "RoomNumber": "PICA"
             },
-            "id": 103
+            "id": "PICA"
         },
         {
             "type": "Feature",
@@ -487,7 +520,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD1"
             },
-            "id": 6
+            "id": "TBD1"
         },
         {
             "type": "Feature",
@@ -531,7 +564,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 22
             },
-            "id": 8
+            "id": 22
         },
         {
             "type": "Feature",
@@ -575,7 +608,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 21
             },
-            "id": 9
+            "id": 21 
         },
         {
             "type": "Feature",
@@ -619,7 +652,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 24
             },
-            "id": 10
+            "id": 24
         },
         {
             "type": "Feature",
@@ -663,7 +696,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 1
             },
-            "id": 11
+            "id": 1
         },
         {
             "type": "Feature",
@@ -707,7 +740,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 2
             },
-            "id": 12
+            "id": 2
         },
         {
             "type": "Feature",
@@ -801,7 +834,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TA"
             },
-            "id": 13
+            "id": "TA"
         },
         {
             "type": "Feature",
@@ -895,7 +928,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TB"
             },
-            "id": 14
+            "id": "TB"
         },
         {
             "type": "Feature",
@@ -939,7 +972,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "CON"
             },
-            "id": 15
+            "id": "CON"
         },
         {
             "type": "Feature",
@@ -983,7 +1016,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TE"
             },
-            "id": 16
+            "id": "TE"
         },
         {
             "type": "Feature",
@@ -1027,7 +1060,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TF"
             },
-            "id": 17
+            "id": "TF"
         },
         {
             "type": "Feature",
@@ -1081,7 +1114,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TG"
             },
-            "id": 18
+            "id": "TG"
         },
         {
             "type": "Feature",
@@ -1125,7 +1158,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "SW"
             },
-            "id": 19
+            "id": "SW"
         },
         {
             "type": "Feature",
@@ -1169,7 +1202,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "WT"
             },
-            "id": 20
+            "id": "WT"
         },
         {
             "type": "Feature",
@@ -1213,7 +1246,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "B"
             },
-            "id": 21
+            "id": "B"
         },
         {
             "type": "Feature",
@@ -1267,7 +1300,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "NRS"
             },
-            "id": 22
+            "id": "NRS"
         },
         {
             "type": "Feature",
@@ -1311,7 +1344,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TH"
             },
-            "id": 23
+            "id": "TH"
         },
         {
             "type": "Feature",
@@ -1355,7 +1388,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TI"
             },
-            "id": 24
+            "id": "TI"
         },
         {
             "type": "Feature",
@@ -1439,7 +1472,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 6
             },
-            "id": 25
+            "id": 6
         },
         {
             "type": "Feature",
@@ -1483,7 +1516,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 8
             },
-            "id": 26
+            "id": 8
         },
         {
             "type": "Feature",
@@ -1527,7 +1560,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TJ"
             },
-            "id": 27
+            "id": "TJ"
         },
         {
             "type": "Feature",
@@ -1571,7 +1604,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TK"
             },
-            "id": 28
+            "id": "TK"
         },
         {
             "type": "Feature",
@@ -1705,7 +1738,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "KIT"
             },
-            "id": 29
+            "id": "KIT"
         },
         {
             "type": "Feature",
@@ -1784,7 +1817,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 5
             },
-            "id": 30
+            "id": 5
         },
         {
             "type": "Feature",
@@ -1828,7 +1861,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 3
             },
-            "id": 31
+            "id": 3
         },
         {
             "type": "Feature",
@@ -1872,7 +1905,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 4
             },
-            "id": 32
+            "id": 4
         },
         {
             "type": "Feature",
@@ -1926,7 +1959,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TD"
             },
-            "id": 33
+            "id": "TD"
         },
         {
             "type": "Feature",
@@ -1980,7 +2013,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TC"
             },
-            "id": 34
+            "id": "TC"
         },
         {
             "type": "Feature",
@@ -2024,7 +2057,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "PRN"
             },
-            "id": 35
+            "id": "PRN"
         },
         {
             "type": "Feature",
@@ -2078,7 +2111,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 7
             },
-            "id": 36
+            "id": 7
         },
         {
             "type": "Feature",
@@ -2122,7 +2155,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 23
             },
-            "id": 37
+            "id": 23
         },
         {
             "type": "Feature",
@@ -2176,7 +2209,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 9
             },
-            "id": 38
+            "id": 9
         },
         {
             "type": "Feature",
@@ -2220,7 +2253,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 30
             },
-            "id": 39
+            "id": 30
         },
         {
             "type": "Feature",
@@ -2264,7 +2297,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 29
             },
-            "id": 40
+            "id": 29
         },
         {
             "type": "Feature",
@@ -2308,7 +2341,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 28
             },
-            "id": 41
+            "id": 28
         },
         {
             "type": "Feature",
@@ -2352,7 +2385,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 27
             },
-            "id": 42
+            "id": 27
         },
         {
             "type": "Feature",
@@ -2396,7 +2429,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 26
             },
-            "id": 43
+            "id": 26
         },
         {
             "type": "Feature",
@@ -2440,7 +2473,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": 25
             },
-            "id": 44
+            "id": 25
         },
         {
             "type": "Feature",
@@ -2495,7 +2528,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "AUS"
             },
-            "id": 45
+            "id": "AUS"
         },
         {
             "type": "Feature",
@@ -2560,7 +2593,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "SPED"
             },
-            "id": 46
+            "id": "SPED"
         },
         {
             "type": "Feature",
@@ -2605,7 +2638,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD2"
             },
-            "id": 49
+            "id": "TBD2"
         },
         {
             "type": "Feature",
@@ -2649,7 +2682,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD3"
             },
-            "id": 50
+            "id": "TBD3"
         },
         {
             "type": "Feature",
@@ -2693,7 +2726,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD4"
             },
-            "id": 51
+            "id": "TBD4"
         },
         {
             "type": "Feature",
@@ -2737,7 +2770,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD6"
             },
-            "id": 52
+            "id": "TBD6"
         },
         {
             "type": "Feature",
@@ -2781,7 +2814,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD7"
             },
-            "id": 53
+            "id": "TBD7"
         },
         {
             "type": "Feature",
@@ -2825,7 +2858,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD8"
             },
-            "id": 54
+            "id": "TBD8"
         },
         {
             "type": "Feature",
@@ -2869,7 +2902,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD9"
             },
-            "id": 56
+            "id": "TBD9"
         },
         {
             "type": "Feature",
@@ -2923,7 +2956,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD10"
             },
-            "id": 57
+            "id": "TBD10"
         },
         {
             "type": "Feature",
@@ -2967,7 +3000,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD11"
             },
-            "id": 58
+            "id": "TBD11"
         },
         {
             "type": "Feature",
@@ -3011,7 +3044,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD12"
             },
-            "id": 59
+            "id": "TBD12"
         },
         {
             "type": "Feature",
@@ -3055,7 +3088,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "MPR"
             },
-            "id": 60
+            "id": "TBD13"
         },
         {
             "type": "Feature",
@@ -3099,7 +3132,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD13"
             },
-            "id": 62
+            "id": "TBD13"
         },
         {
             "type": "Feature",
@@ -3143,7 +3176,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD14"
             },
-            "id": 63
+            "id": "TBD14"
         },
         {
             "type": "Feature",
@@ -3302,7 +3335,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD15"
             },
-            "id": 64
+            "id": "TBD15"
         },
         {
             "type": "Feature",
@@ -3376,7 +3409,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "SL"
             },
-            "id": 65
+            "id": "SL"
         },
         {
             "type": "Feature",
@@ -3490,7 +3523,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "LIB"
             },
-            "id": 66
+            "id": "LIB"
         },
         {
             "type": "Feature",
@@ -3534,7 +3567,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD16"
             },
-            "id": 67
+            "id": "TBD16"
         },
         {
             "type": "Feature",
@@ -3578,7 +3611,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD17"
             },
-            "id": 68
+            "id": "TBD17"
         },
         {
             "type": "Feature",
@@ -3622,7 +3655,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD18"
             },
-            "id": 69
+            "id": "TBD18"
         },
         {
             "type": "Feature",
@@ -3686,7 +3719,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "TBD19"
             },
-            "id": 70
+            "id": "TBD19"
         },
         {
             "type": "Feature",
@@ -3725,7 +3758,7 @@
                 "stroke-opacity": 1,
                 "RoomNumber": "ELV"
             },
-            "id": 71
+            "id": "ELV"
         }
     ]
 }
