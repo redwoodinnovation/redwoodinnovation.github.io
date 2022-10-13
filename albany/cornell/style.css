@@ -6,8 +6,8 @@ body {
 
 h1, h2 {
     position: absolute;
-    left: 10px;
-    font-size: 1.3em;
+    left: 40px;
+    font-size: 2em;
     font-weight: 100;
 }
 h2 {
@@ -16,7 +16,7 @@ h2 {
 }
 
 #toggleContainer {
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
@@ -57,7 +57,7 @@ h2 {
 }
 
 input:checked + .slider {
-  background-color: green;
+  background-color: green; 
 }
 
 input:focus + .slider {
@@ -77,4 +77,31 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.slider.elec {
+  border-radius: 34px;
+}
+
+.slider.elec:before {
+  border-radius: 50%;
+  background-color: red;
+}
+
+.slider.h20 {
+  border-radius: 34px;
+}
+
+.slider.h20:before {
+  border-radius: 50%;
+  background-color: blue;
+}
+
+.slider.gas {
+  border-radius: 34px;
+}
+
+.slider.gas:before {
+  border-radius: 50%;
+  background-color: yellow;
 }
