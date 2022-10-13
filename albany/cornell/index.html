@@ -52,7 +52,7 @@
   </div>
 
   <!-- Create an element where the map will take place -->
-  <svg id="my_dataviz" width="500" height="900" style="transform: translate(0%, -30%);"></svg>
+  <svg id="my_dataviz" width="500" height="900" style="transform: translate(0%, -25%);"></svg>
 
   <script>
 
@@ -74,8 +74,8 @@
 
   var data = d3.map();
   var colorScale = d3.scaleThreshold()
-    .domain([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
-    .range(['#870098', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff1500', '#ff1736', '#ff3882', '#ff00ff', '#fac9fa', '#ffffff']);
+    .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+    .range(['#000000', '#870098', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff1500', '#ff1736', '#ff3882', '#ff00ff', '#fac9fa', '#ffffff']);
 
   // Load external data and boot
   d3.queue()
@@ -129,8 +129,8 @@
 
   var data = d3.map();
   var colorScale = d3.scaleThreshold()
-    .domain([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
-    .range(['#870098', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff1500', '#ff1736', '#ff3882', '#ff00ff', '#fac9fa', '#ffffff']);
+    .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+    .range(['#000000', '#870098', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff1500', '#ff1736', '#ff3882', '#ff00ff', '#fac9fa', '#ffffff']);
 
   // Load external data and boot
   d3.queue()
@@ -213,111 +213,185 @@
 
   <script>
 
-//------//
-// DOTS //
-//------// 
+    //------------------//
+    // Electrical Meter //
+    //------------------// 
 
-// The svg
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+    // The svg
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
 
-// Map and projection
-var projection = d3.geoMercator()
-    .scale(21000000)                      // Zoom
-    .center([-122.29576905,37.890256])    // Geolocated centerpoint
-    .translate([ width/3, height/4 ])
+    // Map and projection
+    var projection = d3.geoMercator()
+        .scale(21000000)                      // Zoom
+        .center([-122.29576905,37.890256])    // Geolocated centerpoint
+        .translate([ width/3, height/4 ])
 
-d3.queue()
-  .defer(d3.json, "grounds.geojson")        // GeoJSON shapes 
-  .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1224835953&single=true&output=csv")            // Location and size
-  .await(ready);
+    d3.queue()
+      .defer(d3.json, "grounds.geojson")        // GeoJSON shapes 
+      .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1224835953&single=true&output=csv")            // Location and size
+      .await(ready);
 
-function ready(error, dataGeo, data) {
+    function ready(error, dataGeo, data) {
 
-  // Create a color scale
-  var allRooms = d3.map(data, function(d){return(d.ObjectName)}).keys()
-  var color = d3.scaleOrdinal()
-    .domain(allRooms)
-    .range(d3.schemePaired);
+    // Add a scale for bubble size
+      var valueExtent = d3.extent(data, function(d) { return +d.n; })
+      var size = d3.scaleSqrt()
+        .domain(valueExtent)                  // What's in the data
+        .range([ 20, 30])                     // Size in pixel
 
-  // Add a scale for bubble size
-  var valueExtent = d3.extent(data, function(d) { return +d.n; })
-  var size = d3.scaleSqrt()
-    .domain(valueExtent)                  // What's in the data
-    .range([ 2, 30])                     // Size in pixel
+    // Add circles:
+    setTimeout(function(){
+      svg
+        .selectAll("myCircles")
+        .data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
+        .enter()
+        .append("circle")
+          .attr("class", "elecmeter")
+          .attr("cx", function(d){ return projection([+d.lon, +d.lat])[0] })
+          .attr("cy", function(d){ return projection([+d.lon, +d.lat])[1] })
+          .attr("r", function(d){ return size(+d.n) })
+          .style("fill", "red") 
+          .attr("stroke", "white")
+          .attr("stroke-width", 1)
+          .attr("fill-opacity", 1)
+    }, 500);
 
-// Add circles:
-setTimeout(function(){
-  svg
-    .selectAll("myCircles")
-    .data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
-    .enter()
-    .append("circle")
-      .attr("cx", function(d){ return projection([+d.lon, +d.lat])[0] })
-      .attr("cy", function(d){ return projection([+d.lon, +d.lat])[1] })
-      .attr("r", function(d){ return size(+d.n) })
-      .style("fill", "red") 
-      .attr("stroke", "white")
-      .attr("stroke-width", 1)
-      .attr("fill-opacity", 1)
-}, 500);
+    var elec_Checkbox = document.querySelector('input[id="elec_toggle"]');
 
-// // Add title and explanation
-//   svg
-//     .append("text")
-//       .attr("text-anchor", "end")
-//       .style("fill", "white")
-//       .attr("x", width - width + 300)
-//       .attr("y", height - height + 100)
-//       .attr("width", 90)
-//       .html("Cornell Elementary School")
-//       .style("font-size", 20)
+    elec_Checkbox.onchange = function() {
+      if(this.checked) {
+        d3.selectAll(".elecmeter").attr("visibility", "visible");
+      } else {
+        d3.selectAll(".elecmeter").attr("visibility", "hidden");
+      }
+    };
+    }
 
-//   // Add legend: circles
-//   var valuesToShow = [1000,2000,3000]
-//   var xCircle = 40
-//   var xLabel = 90
-//   svg
-//     .selectAll("legend")
-//     .data(valuesToShow)
-//     .enter()
-//     .append("circle")
-//       .attr("cx", xCircle)
-//       .attr("cy", function(d){ return height - size(d) } )
-//       .attr("r", function(d){ return size(d) })
-//       .style("fill", "none")
-//       .attr("stroke", "white")
+  </script>
 
-//   // Add legend: segments
-//   svg
-//     .selectAll("legend")
-//     .data(valuesToShow)
-//     .enter()
-//     .append("line")
-//       .attr('x1', function(d){ return xCircle + size(d) } )
-//       .attr('x2', xLabel)
-//       .attr('y1', function(d){ return height - size(d) } )
-//       .attr('y2', function(d){ return height - size(d) } )
-//       .attr('stroke', 'white')
-//       .style('stroke-dasharray', ('2,2'))
+  <script>
 
-//   // Add legend: labels
-//   svg
-//     .selectAll("legend")
-//     .data(valuesToShow)
-//     .enter()
-//     .append("text")
-//       .attr('x', xLabel)
-//       .attr('y', function(d){ return height - size(d) } )
-//       .text( function(d){ return d } )
-//       .style("font-size", 10)
-//       .style("fill", "white")
-//       .attr('alignment-baseline', 'top')
+    //-------------//
+    // Water Meter //
+    //-------------// 
 
-}
+    // The svg
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    // Map and projection
+    var projection = d3.geoMercator()
+        .scale(21000000)                      // Zoom
+        .center([-122.29576905,37.890256])    // Geolocated centerpoint
+        .translate([ width/3, height/4 ])
+
+    d3.queue()
+      .defer(d3.json, "grounds.geojson")        // GeoJSON shapes 
+      .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1770914976&single=true&output=csv")            // Location and size
+      .await(ready);
+
+    function ready(error, dataGeo, data) {
+
+    // Add a scale for bubble size
+      var valueExtent = d3.extent(data, function(d) { return +d.n; })
+      var size = d3.scaleSqrt()
+        .domain(valueExtent)                  // What's in the data
+        .range([ 20, 30])                     // Size in pixel
+
+    // Add circles:
+    setTimeout(function(){
+      svg
+        .selectAll("myCircles")
+        .data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
+        .enter()
+        .append("circle")
+          .attr("class", "h20meter")
+          .attr("cx", function(d){ return projection([+d.lon, +d.lat])[0] })
+          .attr("cy", function(d){ return projection([+d.lon, +d.lat])[1] })
+          .attr("r", function(d){ return size(+d.n) })
+          .style("fill", "blue") 
+          .attr("stroke", "white")
+          .attr("stroke-width", 1)
+          .attr("fill-opacity", 1)
+    }, 500);
+
+    var h20_Checkbox = document.querySelector('input[id="h20_toggle"]');
+
+    h20_Checkbox.onchange = function() {
+      if(this.checked) {
+        d3.selectAll(".h20meter").attr("visibility", "visible");
+      } else {
+        d3.selectAll(".h20meter").attr("visibility", "hidden");
+      }
+    };
+  }
 
 </script>
+
+<script>
+
+    //-----------//
+    // Gas Meter //
+    //-----------// 
+
+    // The svg
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    // Map and projection
+    var projection = d3.geoMercator()
+        .scale(21000000)                      // Zoom
+        .center([-122.29576905,37.890256])    // Geolocated centerpoint
+        .translate([ width/3, height/4 ])
+
+    d3.queue()
+      .defer(d3.json, "grounds.geojson")        // GeoJSON shapes 
+      .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1464833914&single=true&output=csv")            // Location and size
+      .await(ready);
+
+    function ready(error, dataGeo, data) {
+
+    // Add a scale for bubble size
+      var valueExtent = d3.extent(data, function(d) { return +d.n; })
+      var size = d3.scaleSqrt()
+        .domain(valueExtent)                  // What's in the data
+        .range([ 20, 30])                     // Size in pixel
+
+    // Add circles:
+    setTimeout(function(){
+      svg
+        .selectAll("myCircles")
+        .data(data.sort(function(a,b) { return +b.n - +a.n }).filter(function(d,i){ return i<1000 }))
+        .enter()
+        .append("circle")
+          .attr("class", "gasmeter")
+          .attr("cx", function(d){ return projection([+d.lon, +d.lat])[0] })
+          .attr("cy", function(d){ return projection([+d.lon, +d.lat])[1] })
+          .attr("r", function(d){ return size(+d.n) })
+          .style("fill", "yellow") 
+          .attr("stroke", "white")
+          .attr("stroke-width", 1)
+          .attr("fill-opacity", 1)
+    }, 500);
+
+    var gas_Checkbox = document.querySelector('input[id="gas_toggle"]');
+
+    gas_Checkbox.onchange = function() {
+      if(this.checked) {
+        d3.selectAll(".gasmeter").attr("visibility", "visible");
+      } else {
+        d3.selectAll(".gasmeter").attr("visibility", "hidden");
+      }
+    };
+  }
+
+</script>
+
+// CO2 Gradient  
 
 <svg width="600" height="92.26" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" version="1.1" viewBox="0 0 900 92.26" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" style="transform: translate(5%, -180%);">
     
@@ -417,7 +491,5 @@ setTimeout(function(){
         <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Arial-BoldMT, Arial, sans-serif" font-size="100px" font-weight="700">1500</text>
     </g>
 </svg>
-
-
 
 </body>
