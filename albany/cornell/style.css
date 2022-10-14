@@ -4,20 +4,32 @@ body {
   color: white;
 }
 
-h1, h2 {
-    position: absolute;
-    left: 40px;
+h1 {
     font-size: 2em;
     font-weight: 100;
+    text-align: left;
+    padding-left: 200px;
 }
-h2 {
-    top: 30px;
-    font-size: 1em;
+
+#map {
+  float: left;
+  width: 60%;
+  margin-top: 30px;
+  padding-bottom: 90px;
+  z-index: 100;
 }
 
 #toggleContainer {
+  text-align: right;
+  float: right;
+  margin-right: 10px;
+  margin-top: 400px;
+  z-index: 101;
+}
+
+#gradient {
   text-align: left;
-  position: relative;
+  padding-left: 90px;
 }
 
 /* The switch - the box around the slider */
@@ -71,11 +83,11 @@ input:checked + .slider:before {
 }
 
 /* Rounded sliders */
-.slider.round {
+.slider.co2 {
   border-radius: 34px;
 }
 
-.slider.round:before {
+.slider.co2:before {
   border-radius: 50%;
 }
 
