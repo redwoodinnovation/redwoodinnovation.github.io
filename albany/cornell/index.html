@@ -11,6 +11,7 @@
 <body>
     <h1> Cornell Elementary School </h1>
 
+<div id="container">
   <div id="toggleContainer">
     <table>
       <tr>
@@ -263,7 +264,7 @@
           .attr("stroke", "red")
           .attr("stroke-width", 4)
           .attr("fill-opacity", 0)
-    }, 500);
+    }, 1000);
 
     var elec_Checkbox = document.querySelector('input[id="elec_toggle"]');
 
@@ -365,7 +366,7 @@
           .attr("stroke", "blue")
           .attr("stroke-width", 4)
           .attr("fill-opacity", 1)
-    }, 500);
+    }, 1000);
 
     var h20_Checkbox = document.querySelector('input[id="h20_toggle"]');
 
@@ -467,7 +468,7 @@
           .attr("stroke", "yellow")
           .attr("stroke-width", 4)
           .attr("fill-opacity", 0)
-    }, 500);
+    }, 1000);
 
     var gas_Checkbox = document.querySelector('input[id="gas_toggle"]');
 
@@ -554,19 +555,21 @@
     .range(['#000000', '#870098', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff1500', '#ff1736', '#ff3882', '#ff00ff', '#fac9fa', '#ffffff']);
 
   // Add circles:
-  svg
-    .selectAll("myCircles")
-    .data(data.sort(function(a,b) { return +b.CO2ppm - +a.CO2ppm }).filter(function(d,i){ return i<10 }))
-    .enter()
-    .append("circle")
-      .attr("cx", function(d){ return projection([+d.lon, +d.lat])[0] })
-      .attr("cy", function(d){ return projection([+d.lon, +d.lat])[1] })
-      .attr("r", 5)
-      .style("fill", function(d){ return color(d.CO2ppm) })
-      .attr("stroke", "black")
-      .attr("stroke-width", 0)
-      .attr("fill-opacity", .6)
-      .attr("class", "crowdco2meter")
+  setTimeout(function(){ 
+    svg
+      .selectAll("myCircles")
+      .data(data.sort(function(a,b) { return +b.CO2ppm - +a.CO2ppm }).filter(function(d,i){ return i<10 }))
+      .enter()
+      .append("circle")
+        .attr("cx", function(d){ return projection([+d.lon, +d.lat])[0] })
+        .attr("cy", function(d){ return projection([+d.lon, +d.lat])[1] })
+        .attr("r", 5)
+        .style("fill", function(d){ return color(d.CO2ppm) })
+        .attr("stroke", "black")
+        .attr("stroke-width", 0)
+        .attr("fill-opacity", .6)
+        .attr("class", "crowdco2meter")
+  }, 1000);
 
     var crowdco2_Checkbox = document.querySelector('input[id="crowdco2_toggle"]');
 
@@ -581,6 +584,7 @@
   }
 
 </script>
+</div>
 </div>
 
 <!-- CO2 Gradient Key -->

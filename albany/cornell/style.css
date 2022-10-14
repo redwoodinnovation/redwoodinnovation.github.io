@@ -12,11 +12,9 @@ h1 {
 }
 
 #map {
-  float: left;
   width: 60%;
   margin-top: 30px;
   padding-bottom: 90px;
-  z-index: 100;
 }
 
 #toggleContainer {
@@ -24,7 +22,6 @@ h1 {
   float: right;
   margin-right: 10px;
   margin-top: 400px;
-  z-index: 101;
 }
 
 #gradient {
