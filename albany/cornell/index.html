@@ -544,7 +544,7 @@
 
   d3.queue()
     .defer(d3.json, "grounds.geojson")  // World shape
-    .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pub?output=csv") // Position of circles
+    .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pub?output=csv") // Position of circles; sensor data
     .await(ready);
 
   function ready(error, dataGeo, data) {
