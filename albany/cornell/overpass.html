@@ -5,6 +5,7 @@
   <script src="OpenLayers.js"></script>
   <script src="OpenStreetMap.js"></script>
   <script src="overpass.js"></script>
+  <link rel="stylesheet" type="text/css" href="theme/default/style.css"> 
   <script type="text/javascript">
       var lat = 37.8896;
       var lon = -122.2955;
@@ -36,11 +37,11 @@
           map.setCenter (lonLat, zoom);
 
           map.addLayers([
-              make_layer("https://overpass-api.de/api/interpreter?data=[timeout:35];node[amenity=school](bbox);out+skel;(way[amenity=school](bbox);node(w););out+skel;", "yellow"),
-              make_layer("https://overpass-api.de/api/interpreter?data=[timeout:35];node[building=school](bbox);out+skel;(way[building=school](bbox);node(w););out+skel;", "blue"),
-              make_layer("https://overpass-api.de/api/interpreter?data=[timeout:35];node[highway=residential](bbox);out+skel;(way[highway=residential](bbox);node(w););out+skel;", "grey"),
-              make_layer("https://overpass-api.de/api/interpreter?data=[timeout:35];node[highway=tertiary](bbox);out+skel;(way[highway=tertiary](bbox);node(w););out+skel;", "grey"),
-              make_layer("https://overpass-api.de/api/interpreter?data=[timeout:35];node[natural=tree](bbox);out+skel;(way[natural=tree](bbox);node(w););out+skel;", "green")
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[amenity=school](bbox);out+skel;(way[amenity=school](bbox);node(w););out+skel;", "yellow"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[building=school](bbox);out+skel;(way[building=school](bbox);node(w););out+skel;", "blue"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[highway=residential](bbox);out+skel;(way[highway=residential](bbox);node(w););out+skel;", "grey"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[highway=tertiary](bbox);out+skel;(way[highway=tertiary](bbox);node(w););out+skel;", "grey"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[natural=tree](bbox);out+skel;(way[natural=tree](bbox);node(w););out+skel;", "green")
           ]);
 
 	  // var click = new OpenLayers.Control.Click(
