@@ -15,10 +15,6 @@
       function init(){
           map = new OpenLayers.Map ("map", {
           controls:[],
-              // new OpenLayers.Control.Navigation(),
-              // new OpenLayers.Control.PanZoomBar(),
-              // new OpenLayers.Control.LayerSwitcher(),
-              // new OpenLayers.Control.Attribution()],
               maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
               maxResolution: 156543.0399,
               numZoomLevels: 1,
@@ -37,21 +33,12 @@
           map.setCenter (lonLat, zoom);
 
           map.addLayers([
-              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[amenity=school](bbox);out+skel;(way[amenity=school](bbox);node(w););out+skel;", "yellow"),
-              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[building=school](bbox);out+skel;(way[building=school](bbox);node(w););out+skel;", "blue"),
-              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[highway=residential](bbox);out+skel;(way[highway=residential](bbox);node(w););out+skel;", "grey"),
-              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[highway=tertiary](bbox);out+skel;(way[highway=tertiary](bbox);node(w););out+skel;", "grey"),
-              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[natural=tree](bbox);out+skel;(way[natural=tree](bbox);node(w););out+skel;", "green")
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[amenity=school](bbox);out;(way[amenity=school](bbox);node(w););out;", "#222222"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[building=school](bbox);out;(way[building=school](bbox);node(w););out;", "#222222"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[highway=residential](bbox);out;(way[highway=residential](bbox);node(w););out;", "#222222"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[highway=tertiary](bbox);out;(way[highway=tertiary](bbox);node(w););out;", "#222222"),
+              make_layer("//overpass-api.de/api/interpreter?data=[timeout:35];node[natural=tree](bbox);out;(way[natural=tree](bbox);node(w););out;", "green")
           ]);
-
-	  // var click = new OpenLayers.Control.Click(
-	  //     "http://overpass-api.de/api/interpreter?data="
-	  //         + "[timeout:5][out:popup(\"\";[amenity=kindergarten];\"name\";)(\"\";[amenity=school];\"name\";)(\"\";[amenity=university];\"name\";)];"
-	  //         + "(node(bbox);way(bbox););(._;<;);out;"
-		 //  + "&redirect=no&template=ids.popup", 0.0000001, map);
-
-   //        map.addControl(click);
-   //        click.activate();
       }
   </script>
 </head>
