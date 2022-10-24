@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>D3.js and Openlayers - US States</title>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/theme/default/style.css" type="text/css"> -->
+        <!-- <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/blitzer/jquery-ui.css" type="text/css"> -->
+	    <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+        <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+        <!-- <script src="OpenLayers.js"></script> -->
+        <script src="OpenStreetMap.js"></script>
+        <script src="overpass.js"></script>
+        <style>
+            body {
+        	    font-family: Arial, Helvetica, sans-serif;
+                background-color: black;
+            }
+            #map {
+            	margin: 0;
+            	width: 500px;
+            	height: 800px;
+            }
+            path {
+                fill: #000;
+                fill-opacity: .2;
+                stroke: #222;
+                stroke-width: 1.5px;
+            }
+/*            path:hover {
+                fill: brown;
+                fill-opacity: .7;
+            }*/
+        </style>
+
+        <script type="text/javascript">
+            var map;
+
+            function init() {
+                var extent = [-20037508.34, -20037508.34,
+                    20037508.34, 20037508.34
+                ];
+
+                map = new OpenLayers.Map('map', {
+                    numZoomLevels: 20,
+                    projection: new OpenLayers.Projection("EPSG:900913"),
+                    displayProjection: new OpenLayers.Projection("EPSG: 4326"),
+                    maxExtent: extent,
+                    restrictedExtent: extent,
+                    controls: [
+                        new OpenLayers.Control.Navigation(),
+                        new OpenLayers.Control.Zoom(),
+                        new OpenLayers.Control.ScaleLine(),
+                        new OpenLayers.Control.LayerSwitcher(),
+                        new OpenLayers.Control.MousePosition(),
+                        new OpenLayers.Control.KeyboardDefaults()
+                    ]
+                });
+
+                // var layerMapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
+                // map.addLayer(layerMapnik);
+                // layerMapnik.setOpacity(1);
+
+                var ol_wms = new OpenLayers.Layer.OSM.Mapnik();
+                map.addLayers([ol_wms]);
+                ol_wms.setOpacity(0.4);
+                map.setCenter(new OpenLayers.LonLat(-122.2955, 37.8896).transform("EPSG:4326", "EPSG:900913"), 19);
+
+                d3.json("level0.geojson", function (collection) {
+                    var overlay = new OpenLayers.Layer.Vector("Level 0");
+
+                    // Add the container when the overlay is added to the map.
+                    overlay.afterAdd = function () {
+                        //get the vector layer div element
+                        var div = d3.selectAll("#" + overlay.div.id);
+                        //remove the existing svg element and create a new one
+                        div.selectAll("svg").remove();
+                        var svg = div.append("svg");
+                        //Add a G (group) element
+                        g = svg.append("g");
+                        var bounds = d3.geo.bounds(collection),
+                            path = d3.geo.path().projection(project);
+                        var feature = g.selectAll("path")
+                            .data(collection.features)
+                            .enter().append("path");
+                        map.events.register("moveend", map, reset);
+                        reset();
+
+                        function reset() {
+                            var bottomLeft = project(bounds[0]),
+                                topRight = project(bounds[1]);
+
+                            svg.attr("width", topRight[0] - bottomLeft[0])
+                                .attr("height", bottomLeft[1] - topRight[1])
+                                .style("margin-left", bottomLeft[0] + "px")
+                                .style("margin-top", topRight[1] + "px");
+
+                            g.attr("transform", "translate(" + -bottomLeft[0] + "," + -topRight[1] + ")");
+
+                            feature.attr("d", path);
+                        }
+                        function project(x) {
+                            var point = map.getViewPortPxFromLonLat(new OpenLayers.LonLat(x[0], x[1])
+                                 .transform("EPSG:4326", "EPSG:900913"));
+                            return [point.x, point.y];
+                        }
+                    }
+                    map.addLayer(overlay);
+                });
+
+                d3.json("level1.geojson", function (collection) {
+                    var overlay = new OpenLayers.Layer.Vector("Level 1");
+
+                    // Add the container when the overlay is added to the map.
+                    overlay.afterAdd = function () {
+                        //get the vector layer div element
+                        var div = d3.selectAll("#" + overlay.div.id);
+                        //remove the existing svg element and create a new one
+                        div.selectAll("svg").remove();
+                        var svg = div.append("svg");
+                        //Add a G (group) element
+                        g = svg.append("g");
+                        var bounds = d3.geo.bounds(collection),
+                            path = d3.geo.path().projection(project);
+                        var feature = g.selectAll("path")
+                            .data(collection.features)
+                            .enter().append("path");
+                        map.events.register("moveend", map, reset);
+                        reset();
+
+                        function reset() {
+                            var bottomLeft = project(bounds[0]),
+                                topRight = project(bounds[1]);
+
+                            svg.attr("width", topRight[0] - bottomLeft[0])
+                                .attr("height", bottomLeft[1] - topRight[1])
+                                .style("margin-left", bottomLeft[0] + "px")
+                                .style("margin-top", topRight[1] + "px");
+
+                            g.attr("transform", "translate(" + -bottomLeft[0] + "," + -topRight[1] + ")");
+
+                            feature.attr("d", path);
+                        }
+                        function project(x) {
+                            var point = map.getViewPortPxFromLonLat(new OpenLayers.LonLat(x[0], x[1])
+                                 .transform("EPSG:4326", "EPSG:900913"));
+                            return [point.x, point.y];
+                        }
+                    }
+                    map.addLayer(overlay);
+                });
+
+                map.addLayers([
+                    make_layer("//overpass-api.de/api/interpreter?data=[timeout:60];node[amenity=school](bbox);out;(way[amenity=school](bbox);node(w););out;", "#222222"),
+                    make_layer("//overpass-api.de/api/interpreter?data=[timeout:60];node[building=school](bbox);out;(way[building=school](bbox);node(w););out;", "#222222"),
+                    make_layer("//overpass-api.de/api/interpreter?data=[timeout:60];node[highway=residential](bbox);out;(way[highway=residential](bbox);node(w););out;", "#222222"),
+                    make_layer("//overpass-api.de/api/interpreter?data=[timeout:60];node[highway=tertiary](bbox);out;(way[highway=tertiary](bbox);node(w););out;", "#222222"),
+                    make_layer("//overpass-api.de/api/interpreter?data=[timeout:60];node[natural=tree](bbox);out;(way[natural=tree](bbox);node(w););out;", "green")
+                          ]);
+            }
+        </script>
+    </head>
+    <body onload="init()">
+    <h1></h1>
+        <div id="map"></div>
+        
+        <!-- <p>Another example using point data (earthquakes) and D3.js info balloons is <a href="quakes.html">here</a>.
+        <p>Code is at <a href="https://gist.github.com/mbertrand/5218300">https://gist.github.com/mbertrand/5218300</a> -->
+    </body>
+</html>
