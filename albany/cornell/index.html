@@ -664,23 +664,29 @@
                 .center([-122.29576905, 37.890256]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
-            d3.xml("entrance-exit.xml", function ready(error, xml) {
+            d3.queue()
+                .defer(d3.json, "grounds.geojson") 
+                .defer(d3.csv, "entrance-exit.csv") // Locations 
+                .await(ready);
+
+            function ready(error, dataGeo, data) {
 
                 // Add circles:
-                svg
-                   .selectAll("myCircles")
-                   .data(xml.documentElement.getElementsByTagName("node"))
-                   .enter()
-                   .append("myCircles")
-                   .attr("class", "entries")
-                   .attr("cx", function(d) { return d.getAttribute('lon'); })
-                   .attr("cy", function(d) { return d.getAttribute('lat'); })
-                   .attr("r", 8)
-                   .attr("fill", "blue")
-                   .attr("stroke", "black")
-                   .attr("stroke-width", 1)
-                   .attr("fill-opacity", .5);
-                
+                setTimeout(function() {
+                    svg
+                        .selectAll("myCircles")
+                        .data(data.sort(function(a, b) { return +b.id - +a.id }).filter(function(d, i) { return i < 10 }))
+                        .enter()
+                        .append("circle")
+                        .attr("class", "trees")
+                        .attr("cx", function(d) { return projection([+d.longitude, +d.latitude])[0] })
+                        .attr("cy", function(d) { return projection([+d.longitude, +d.latitude])[1] })
+                        .attr("r", 8)
+                        .style("fill", "blue")
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 1)
+                        .attr("fill-opacity", .5)
+                }, 1000);
                 var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
 
                 entries_Checkbox.onchange = function() {
@@ -691,8 +697,8 @@
                     }
                 };
 
-            })
-
+            }
+            
             </script>
             <script>
             //------//
