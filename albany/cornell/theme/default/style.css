@@ -4,6 +4,13 @@ body {
   color: white;
 }
 
+table {
+  background-color: black;
+  font-family: "Proxima Nova", "Montserrat", sans-serif;
+  color: white;
+  width: 300px;
+}
+
 h1 {
     font-size: 2em;
     font-weight: 100;
