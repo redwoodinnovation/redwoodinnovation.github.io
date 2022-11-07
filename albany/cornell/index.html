@@ -3,6 +3,7 @@
 
 <head>
     <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js" integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" type="text/css" href="theme/default/style.css">
 </head>
 
@@ -856,8 +857,57 @@
                 <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Arial-BoldMT, Arial, sans-serif" font-size="100px" font-weight="700">1500</text>
             </g>
         </svg>
-       </div>
-        <iframe src="https://docs.google.com/spreadsheets/d/1LAOdb-N3kTR97rE1fF7k4dGDyB9jhhNuM-PmiYYi3wo/gviz/tq?tqx=out:html&tq&gid=1180288724" height="220" width="260" style="background
-        color: black; transform: translate(175%, -515%); border: 0px;"></iframe>
+        </div>
+    <table class="table" style="position: absolute; left: 50 px; top: 100 px;">
+        <thead>
+            <tr id="tableHeader">
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+<script>
+    function createDataElement(htmlTag, innerText, idParent) {
+        let node = document.createElement(htmlTag);
+        let textnode = document.createTextNode(innerText);
+        node.appendChild(textnode);
+        document.getElementById(idParent).appendChild(node);
+    }
+
+    function createHeaderElement(columnText) {
+        createDataElement("th", columnText, "tableHeader");
+    }
+
+    function createCellData(rowIndex, dataIndex, cellText) {
+        if(dataIndex === 0) {
+            let node = document.createElement("tr");
+            node.setAttribute("id", "row" + rowIndex);
+            document.getElementById("tableBody").appendChild(node);
+
+            createDataElement("td", cellText, "row" + rowIndex);
+        } else {
+            createDataElement("td", cellText, "row" + rowIndex);
+        }
+    }
+
+  Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vRg72CoHJy60_V9F0wA6S_yOUR2jsag1D9yjEFIYgqDZ2JqvUggXgh0uDGLHRaZNQ-8WUV9AxtQPzAT/pub?gid=1180288724&single=true&output=csv', {
+        header: false,
+        download: true,
+        complete: function(results) {
+            for(let i = 0; i < results.data.length; i++) {
+                if(i === 0) {
+                    for(let j = 0; j < results.data[i].length; j++) {
+                        createHeaderElement(results.data[i][j]);
+                    }
+                }
+                if(i > 0) {
+                    for(let j = 0; j < results.data[i].length; j++) {
+                        createCellData(i, j, results.data[i][j]);
+                    }
+                }
+            }
+        }
+    });
+</script> 
 </body>
 
