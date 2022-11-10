@@ -4,24 +4,30 @@ body {
   color: white;
 }
 
-.table {
-  background-color: black;
-  font-family: "Proxima Nova", "Montserrat", sans-serif;
-  font-size: 1em;
-  color: white;
-  position: absolute; 
-  top: 90px; 
-  left: 460px;
-  right: 0;
-  bottom: 0;
-  z-index: 2; 
+h1 {
+    font-family: "Proxima Nova", "Montserrat", sans-serif;
+    font-size: 1.2em;
+    font-weight: 300;
+    text-align: left;
+    padding-left: 20px;
 }
 
-h1 {
-    font-size: 2em;
-    font-weight: 100;
-    text-align: left;
-    padding-left: 200px;
+.row {
+  width: 100%;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+table {
+  background-color: black;
+  font-family: "Proxima Nova", "Montserrat", sans-serif;
+  font-size: .9em;
+  color: white;
+  top: 100px; 
+  left: 500px;
+  right: 0;
+  bottom: 0;
+  z-index: 3; 
 }
 
 #map {
@@ -32,16 +38,37 @@ h1 {
 
 #toggleContainer {
   text-align: right;
-  text-size:  1em;
+  text-size:  .9em;
   position: absolute;
-  top:  330px;
-  left: 520px; 
-  z-index: 2;
+  top:  275px;
+  left: 500px; 
+  z-index: 4;
+}
+
+table.resources {
+  table-layout: fixed;
+  width: 645px;
+  text-align: center;
+  position: absolute;
+  left: -50px;
+  top: -20px;
+}
+
+#toggleContainer2 {
+  text-align: right;
+  text-size:  .9em;
+  position: absolute;
+  top:  1200px;
+  left: 100px; 
+  z-index: 3;
 }
 
 #gradient {
   text-align: left;
-  padding-left: 90px;
+  padding-left: 65px;
+  position: absolute;
+  top: 1000px;
+  z-index: 4;
 }
 
 /* The switch - the box around the slider */
