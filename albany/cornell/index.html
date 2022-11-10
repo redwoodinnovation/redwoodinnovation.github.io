@@ -769,7 +769,7 @@
                 .center([-122.29576905, 37.89]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
-            d3.xml("http://overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5Bentrance%5D(37.887310011878,-122.29732096195,37.891827238286,-122.29365170002););out;%3E;out%20skel%20qt;", function ready(error, xml) {
+            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5Bentrance%5D(37.887310011878,-122.29732096195,37.891827238286,-122.29365170002););out;%3E;out%20skel%20qt;", function ready(error, xml) {
 
             // d3.xml("entrance-exit.xml", function ready(error, xml) {
            
