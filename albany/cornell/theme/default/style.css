@@ -58,7 +58,7 @@ table.resources {
   text-align: right;
   text-size:  .9em;
   position: absolute;
-  top:  1200px;
+  top:  1220px;
   left: 100px; 
   z-index: 3;
 }
@@ -67,7 +67,7 @@ table.resources {
   text-align: left;
   padding-left: 65px;
   position: absolute;
-  top: 1000px;
+  top: 1020px;
   z-index: 4;
 }
 
