@@ -771,6 +771,7 @@
                         .data(data.sort(function(a, b) { return +b.CO2ppm - +a.CO2ppm }).filter(function(d, i) { return i < 10 }))
                         .enter()
                         .append("circle")
+                        .attr("class", "crowdco2meter")
                         .attr("cx", function(d) { return projection([+d.lon, +d.lat])[0] })
                         .attr("cy", function(d) { return projection([+d.lon, +d.lat])[1] })
                         .attr("r", 5)
@@ -781,7 +782,6 @@
                             d.total = data.get(d.id) || 0;
                             return opacityScale(d.total);
                             }) 
-                        .attr("class", "crowdco2meter")
                         .on("mouseover", mouseover)
                         .on("mousymove", mousemove)
                         .on("mouseleave", mouseleave)
