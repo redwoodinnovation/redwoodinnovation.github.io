@@ -124,7 +124,7 @@
 
         </div>
         <div id="map">
-            <svg id="my_dataviz" width="700" height="950"></svg>
+            <svg id="my_dataviz" width="700" height="980"></svg>
             <script>
             //----------//
             // HIGHWAYS //
@@ -426,6 +426,28 @@
                         d3.selectAll(".elecmeter").attr("visibility", "hidden");
                     }
                 };
+
+                svg
+                    .append("text")
+                    .attr("text-anchor", "end")
+                    .style("fill", "white")
+                    .attr("x", width - 480)
+                    .attr("y", height - 77)
+                    .attr("width", 90)
+                    .html("Annual Resource Use")
+                    .style("font-size", 14)
+                    .style("font-weight", "bold")
+
+                svg
+                    .append("text")
+                    .attr("text-anchor", "end")
+                    .style("fill", "white")
+                    .attr("x", width / 2)
+                    .attr("y", height / 2)
+                    .attr("width", 90)
+                    .html("×")
+                    .style("font-size", 14)
+                    .style("font-weight", "bold")
 
                 // Add legend: circles
                 var valuesToShow = [500000, 10000000]
@@ -791,7 +813,6 @@
                 .attr("stroke-width", 1)
                 .attr("fill-opacity", 1)
                 .attr("class", "entries")
-                .attr("z-index", "4")
             
                 var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
 
@@ -807,7 +828,61 @@
 
             </script>
             
-            <script>
+           <script>
+            //-------//
+            // TREES //
+            //-------// 
+
+            // The svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map and projection
+            var projection = d3.geoMercator()
+                .scale(21000000) // Zoom
+                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .translate([width / 3, height / 4])
+
+            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5B%22natural%22%3D%22tree%22%5D(37.887310011878,-122.29732096195,37.891827238286,-122.29365170002););out;%3E;out%20skel%20qt;", function ready(error, xml) {
+
+            // d3.xml("entrance-exit.xml", function ready(error, xml) {
+           
+            svg
+                .selectAll("circle")
+                .data(xml.documentElement.getElementsByTagName("node"))
+                .enter()
+                .insert("circle")
+                .each(function (d) {
+                    const projected = projection([
+                    d.getAttribute("lon"),
+                    d.getAttribute("lat"),
+                ]);
+            d3.select(this).attr("cx", projected[0]).attr("cy", projected[1]);
+                }) 
+                .attr("r", 8)
+                .style("fill", "green")
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("fill-opacity", 1)
+                .attr("class", "trees")
+            
+                var entries_Checkbox = document.querySelector('input[id="trees_toggle"]');
+
+                entries_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".trees").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".trees").attr("visibility", "hidden");
+                    }
+                };
+
+           })
+
+            </script> 
+
+
+            <!-- <script>
             //------//
             // TREE //
             //------// 
@@ -858,7 +933,7 @@
                 };
 
             }
-            </script>
+            </script> -->
             
             
         </div>
@@ -966,9 +1041,6 @@
     
         <div id="toggleContainer2" style="transform: 0%, 100%; table-layout: fixed; width: 600px; ">
             <table class="resources" style="font-size: .85em;">
-                <tr>
-                    <th>Annual Resource Use</th>
-                </tr>
                 <tr>
                     <td>kWh - 2021 Electrical</td>
                     <td>gal - 2021 Water</td>
