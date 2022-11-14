@@ -7,9 +7,29 @@ body {
 h1 {
     font-family: "Proxima Nova", "Montserrat", sans-serif;
     font-size: 1.2em;
-    font-weight: 300;
+    font-style: bold;
     text-align: left;
     padding-left: 20px;
+}
+
+/* unvisited link */
+a:link {
+  color: cyan;
+}
+
+/* visited link */
+a:visited {
+  color: cyan;
+}
+
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+
+/* selected link */
+a:active {
+  color: blue;
 }
 
 .row {
@@ -22,6 +42,7 @@ table {
   background-color: black;
   font-family: "Proxima Nova", "Montserrat", sans-serif;
   font-size: .9em;
+  text-align: left;
   color: white;
   top: 100px; 
   left: 500px;
@@ -45,29 +66,29 @@ table {
   z-index: 4;
 }
 
-table.resources {
+/*table.resources {
   table-layout: fixed;
   width: 645px;
   text-align: center;
   position: absolute;
   left: -50px;
   top: -20px;
-}
+}*/
 
-#toggleContainer2 {
+/*#toggleContainer2 {
   text-align: right;
   text-size:  .9em;
   position: absolute;
-  top:  1220px;
+  top:  1240px;
   left: 100px; 
   z-index: 3;
-}
+}*/
 
 #gradient {
   text-align: left;
   padding-left: 65px;
   position: absolute;
-  top: 1000px;
+  top: 1020px;
   z-index: 4;
 }
 
