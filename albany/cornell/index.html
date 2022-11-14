@@ -4,6 +4,7 @@
 <head>
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js" integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme/default/style.css">
 </head>
 
@@ -782,6 +783,7 @@
                             d.total = data.get(d.id) || 0;
                             return opacityScale(d.total);
                             }) 
+                        // .attr("fill-opacity", 0.2)
                         .on("mouseover", mouseover)
                         .on("mousymove", mousemove)
                         .on("mouseleave", mouseleave)
@@ -815,7 +817,7 @@
                 .center([-122.29576905, 37.89]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
-            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5Bentrance%5D(37.887310011878,-122.29732096195,37.891827238286,-122.29365170002););out;%3E;out%20skel%20qt;", function ready(error, xml) {
+            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992);node%5B%22natural%22%3D%22tree%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
 
             // d3.xml("entrance-exit.xml", function ready(error, xml) {
            
@@ -852,7 +854,7 @@
 
             </script>
             
-           <script>
+ <!--           <script>
             //-------//
             // TREES //
             //-------// 
@@ -903,7 +905,7 @@
 
            })
 
-            </script> 
+            </script>  -->
 
 
             <!-- <script>
@@ -1063,7 +1065,7 @@
         </svg>
         </div>
     
-        <div id="toggleContainer2" style="transform: 0%, 100%; table-layout: fixed; width: 600px; ">
+        <div id="toggleContainer2" style="transform: 15%, 100%; table-layout: fixed; width: 600px; ">
             <table class="resources" style="font-size: .85em;">
                 <tr>
                     <td>kWh - 2021 Electrical</td>
