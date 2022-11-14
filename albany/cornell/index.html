@@ -779,11 +779,11 @@
                         .style("fill", function(d) { return color(d.CO2ppm) })
                         .attr("stroke", "black")
                         .attr("stroke-width", 0)
-                        .attr("fill-opacity", function(d) {
-                            d.total = data.get(d.id) || 0;
-                            return opacityScale(d.total);
-                            }) 
-                        // .attr("fill-opacity", 0.2)
+                        // .attr("fill-opacity", function(d) {
+                        //     d.total = data.get(d.id) || 0;
+                        //     return opacityScale(d.total);
+                        //     }) 
+                        .attr("fill-opacity", 0.5)
                         .on("mouseover", mouseover)
                         .on("mousymove", mousemove)
                         .on("mouseleave", mouseleave)
@@ -817,7 +817,7 @@
                 .center([-122.29576905, 37.89]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
-            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992);node%5B%22natural%22%3D%22tree%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
+            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992);node%5B%22natural%22=%22tree%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
 
             // d3.xml("entrance-exit.xml", function ready(error, xml) {
            
