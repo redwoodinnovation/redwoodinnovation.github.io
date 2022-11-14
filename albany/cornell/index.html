@@ -9,12 +9,11 @@
 </head>
 
 <body>
-    <div class="row">
-  
+ 
 <div class="column">
-<table class="table" style="font-size: 0.85em;">
+    <h1>CO<sub>2</sub></h1>
+    <table class="table" style="font-size: 0.85em;">
         <thead>
-            <td><h1>Daily CO<sub>2</sub></h1></td>
             <tr id="tableHeader2">
             </tr>
         </thead>
@@ -69,28 +68,28 @@
     <div id="toggleContainer">
             <table style="font-size: .85em;">
                 <tr>
-                    <td>CO<sub>2</sub> - Outdoor 4PM</td>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1i7I8GU8UnDoeGHtY4Pu45vd546xVyDjxp0Mxk5vXqFk/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Outdoor 4PM</a></td>
                     <td><label class="switch">
                             <input id="picarro_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
-                    <td>CO<sub>2</sub> - Buildings Max</td>
+                    <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Max</a></td>
                     <td><label class="switch">
                             <input id="building_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
-                    <td>CO<sub>2</sub> - Rooms Level 1</td>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 1</a></td>
                     <td><label class="switch">
                             <input id="l1_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
-                    <td>CO<sub>2</sub> - Rooms Level 0</td>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 0</a></td>
                     <td><label class="switch">
                             <input id="l0_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
@@ -99,13 +98,13 @@
                 <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                 <th>Crowdsense History</th>
                 <tr>
-                    <td>CO<sub>2</sub> - Crowdsense</td>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1D4DeVEVcacgG_N9Oe2uMkp2ivCZdjjL2Fe1NE07ZDWw/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Crowdsense</a></td>
                     <td><label class="switch">
                             <input id="crowdco2_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
-                <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+               <!--  <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                 <tr>
                     <td>Entrances</td>
                     <td><label class="switch">
@@ -119,7 +118,7 @@
                             <input id="trees_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
-                </tr>
+                </tr> -->
             </table>
         </div>
 
@@ -390,7 +389,7 @@
                 }
             };
             </script>
-            <script>
+            <!-- <script>
             //------------------//
             // Electrical Meter //
             //------------------// 
@@ -510,8 +509,8 @@
                     .attr('alignment-baseline', 'middle')
 
             }
-            </script>
-            <script>
+            </script> -->
+            <!-- <script>
             //-------------//
             // Water Meter //
             //-------------// 
@@ -608,8 +607,8 @@
                     .attr('fill', 'white')
                     .attr('alignment-baseline', 'middle')
             }
-            </script>
-            <script>
+            </script> -->
+           <!--  <script>
             //-----------//
             // Gas Meter //
             //-----------// 
@@ -707,7 +706,7 @@
                     .attr('fill', 'white')
                     .attr('alignment-baseline', 'middle')
             }
-            </script>
+            </script> -->
             <script>
             //----------------//
             // Crowdsense CO2 //
@@ -801,10 +800,10 @@
 
             }
             </script>
-            <script>
-            //---------------//
-            // ENTRANCE-EXIT //
-            //---------------// 
+           <!--  <script>
+            //-------------------//
+            // ENTRANCES & TREES //
+            //-------------------// 
 
             // The svg
             var svg = d3.select("svg"),
@@ -852,118 +851,9 @@
 
            })
 
-            </script>
-            
- <!--           <script>
-            //-------//
-            // TREES //
-            //-------// 
-
-            // The svg
-            var svg = d3.select("svg"),
-                width = +svg.attr("width"),
-                height = +svg.attr("height");
-
-            // Map and projection
-            var projection = d3.geoMercator()
-                .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
-                .translate([width / 3, height / 4])
-
-            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5B%22natural%22%3D%22tree%22%5D(37.887310011878,-122.29732096195,37.891827238286,-122.29365170002););out;%3E;out%20skel%20qt;", function ready(error, xml) {
-
-            // d3.xml("entrance-exit.xml", function ready(error, xml) {
-           
-            svg
-                .selectAll("circle")
-                .data(xml.documentElement.getElementsByTagName("node"))
-                .enter()
-                .insert("circle")
-                .each(function (d) {
-                    const projected = projection([
-                    d.getAttribute("lon"),
-                    d.getAttribute("lat"),
-                ]);
-            d3.select(this).attr("cx", projected[0]).attr("cy", projected[1]);
-                }) 
-                .attr("r", 8)
-                .style("fill", "green")
-                .attr("stroke", "black")
-                .attr("stroke-width", 1)
-                .attr("fill-opacity", 1)
-                .attr("class", "trees")
-            
-                var entries_Checkbox = document.querySelector('input[id="trees_toggle"]');
-
-                entries_Checkbox.onchange = function() {
-                    if (this.checked) {
-                        d3.selectAll(".trees").attr("visibility", "visible");
-                    } else {
-                        d3.selectAll(".trees").attr("visibility", "hidden");
-                    }
-                };
-
-           })
-
-            </script>  -->
-
-
-            <!-- <script>
-            //------//
-            // TREE //
-            //------// 
-
-            // The svg
-            var svg = d3.select("svg"),
-                width = +svg.attr("width"),
-                height = +svg.attr("height");
-
-            // Map and projection
-            var projection = d3.geoMercator()
-                .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
-                .translate([width / 3, height / 4])
-
-            d3.queue()
-                .defer(d3.json, "grounds.geojson") 
-                .defer(d3.csv, "tree.csv") // Locations 
-                .await(ready);
-
-            function ready(error, dataGeo, data) {
-
-                // Add circles:
-                setTimeout(function() {
-                    svg
-                        .selectAll("myCircles")
-                        .data(data.sort(function(a, b) { return +b.id - +a.id }).filter(function(d, i) { return i < 10 }))
-                        .enter()
-                        .append("circle")
-                        .attr("class", "trees")
-                        .attr("cx", function(d) { return projection([+d.longitude, +d.latitude])[0] })
-                        .attr("cy", function(d) { return projection([+d.longitude, +d.latitude])[1] })
-                        .attr("r", 8)
-                        .style("fill", "green")
-                        .attr("stroke", "black")
-                        .attr("stroke-width", 1)
-                        .attr("fill-opacity", 1)
-                }, 1000);
-
-                var entries_Checkbox = document.querySelector('input[id="trees_toggle"]');
-
-                entries_Checkbox.onchange = function() {
-                    if (this.checked) {
-                        d3.selectAll(".trees").attr("visibility", "visible");
-                    } else {
-                        d3.selectAll(".trees").attr("visibility", "hidden");
-                    }
-                };
-
-            }
             </script> -->
             
-            
-        </div>
-    </div>
+   </div>
     <!-- CO2 Gradient Key -->
     <div id="gradient">
         <svg width="600" height="92.26" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" version="1.1" viewBox="0 0 900 92.26" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" >
@@ -1065,7 +955,7 @@
         </svg>
         </div>
     
-        <div id="toggleContainer2" style="transform: 15%, 100%; table-layout: fixed; width: 600px; ">
+        <!-- <div id="toggleContainer2" style="transform: 15%, 100%; table-layout: fixed; width: 600px; ">
             <table class="resources" style="font-size: .85em;">
                 <tr>
                     <td>kWh - 2021 Electrical</td>
@@ -1089,6 +979,6 @@
                         </label></td>
                 </tr>
             </table>
-        </div>
+        </div> -->
 </body>
 
