@@ -1,6 +1,7 @@
 name: Scheduled overpass api query for school buildings 
 
 on:
+  push:
   schedule:
     - cron: '10 */8 * * *' # Scheduled for the 10th minute of every hour   
 
