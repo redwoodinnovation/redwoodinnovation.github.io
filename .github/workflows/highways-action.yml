@@ -2,7 +2,6 @@ name: Scheduled overpass api query for highways
 
 on:
   schedule:
-      push:
       - cron: '0 * * * *' # scheduled for the turn of every hour   
 
 jobs:
