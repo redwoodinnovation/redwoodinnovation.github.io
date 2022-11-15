@@ -796,13 +796,9 @@
                         .attr("cy", function(d) { return projection([+d.lon, +d.lat])[1] })
                         .attr("r", 5)
                         .style("fill", function(d) { return color(d.CO2ppm) })
+                        .style("fill-opacity", function(d) { return opacityScale(d.CO2ppm) })
                         .attr("stroke", "black")
                         .attr("stroke-width", 0)
-                        .attr("fill-opacity", function(d) {
-                            d.total = data.get(d.id) || 0;
-                            return opacityScale(d.total);
-                            }) 
-                        // .attr("fill-opacity", 0.5)
                         .on("mouseover", mouseover)
                         .on("mousymove", mousemove)
                         .on("mouseleave", mouseleave)
