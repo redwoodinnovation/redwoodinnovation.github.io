@@ -124,7 +124,7 @@
 
         </div>
         <div id="map">
-            <svg id="my_dataviz" width="700" height="980"></svg>
+            <svg id="my_dataviz" width="700" height="810"></svg>
             <script>
             //----------//
             // HIGHWAYS //
@@ -139,7 +139,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -180,7 +180,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -232,7 +232,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -320,7 +320,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -422,7 +422,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.queue()
@@ -543,7 +543,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.queue()
@@ -641,7 +641,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.queue()
@@ -740,7 +740,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             // create a tooltip
@@ -829,10 +829,10 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89]) // Geolocated centerpoint
+                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
-            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8906,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992);node%5B%22natural%22=%22tree%22%5D(37.888334561756,-122.29644656181,37.891031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
+            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.8900706,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.890071031345968,-122.29457437992);node%5B%22natural%22=%22tree%22%5D(37.888334561756,-122.29644656181,37.890071031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
 
             // d3.xml("entrance-exit.xml", function ready(error, xml) {
            
