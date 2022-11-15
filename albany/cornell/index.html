@@ -426,7 +426,7 @@
                 .translate([width / 3, height / 4])
 
             d3.queue()
-                .defer(d3.json, "grounds.geojson") 
+                .defer(d3.json, "geojson/grounds.geojson") 
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1224835953&single=true&output=csv") // Location and size
                 .await(ready);
 
@@ -547,7 +547,7 @@
                 .translate([width / 3, height / 4])
 
             d3.queue()
-                .defer(d3.json, "grounds.geojson")
+                .defer(d3.json, "geojson/grounds.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1770914976&single=true&output=csv") // Location and size
                 .await(ready);
 
@@ -645,7 +645,7 @@
                 .translate([width / 3, height / 4])
 
             d3.queue()
-                .defer(d3.json, "grounds.geojson") 
+                .defer(d3.json, "geojson/grounds.geojson") 
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1464833914&single=true&output=csv") // Location and size
                 .await(ready);
 
@@ -769,7 +769,7 @@
                 }
 
             d3.queue()
-                .defer(d3.json, "grounds.geojson") // Property shape
+                .defer(d3.json, "geojson/grounds.geojson") // Property shape
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pub?gid=768142103&single=true&output=csv") // Position of circles; sensor data
                 .await(ready);
 
