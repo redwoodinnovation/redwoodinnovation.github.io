@@ -2,7 +2,7 @@ name: Scheduled overpass api query for school buildings
 
 on:
   schedule:
-    - cron: '10 * * * *' # Scheduled for the 10th minute of every hour   
+    - cron: '10 */8 * * *' # Scheduled for the 10th minute of every hour   
 
 jobs:
   build:
@@ -15,7 +15,8 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.7.7
+          python-version: '3.x'
+          cache: 'pip'
 
       - name: install python packages
         run: |
@@ -30,10 +31,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit -m "update data" -a
+          git commit -m "update data" -a --allow-empty
 
       - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main  
