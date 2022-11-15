@@ -146,7 +146,7 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "highways.geojson")
+                .defer(d3.json, "geojson/highways.geojson")
                 .await(ready);
 
             function ready(error, topo) {
@@ -314,8 +314,8 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "level0.geojson")
-                .defer(d3.json, "level1.geojson")
+                .defer(d3.json, "geojson/level0.geojson")
+                .defer(d3.json, "geojson/level1.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.RoomNumber, +d.co2ppm); })
                 .await(ready);
 
@@ -778,11 +778,11 @@
                         .style("fill", function(d) { return color(d.CO2ppm) })
                         .attr("stroke", "black")
                         .attr("stroke-width", 0)
-                        // .attr("fill-opacity", function(d) {
-                        //     d.total = data.get(d.id) || 0;
-                        //     return opacityScale(d.total);
-                        //     }) 
-                        .attr("fill-opacity", 0.5)
+                        .attr("fill-opacity", function(d) {
+                            d.total = data.get(d.id) || 0;
+                            return opacityScale(d.total);
+                            }) 
+                        // .attr("fill-opacity", 0.5)
                         .on("mouseover", mouseover)
                         .on("mousymove", mousemove)
                         .on("mouseleave", mouseleave)
