@@ -32,15 +32,10 @@ a:active {
   color: blue;
 }
 
-.row {
-  width: 100%;
-  margin-left:10px;
-  margin-right:10px;
-}
-
 table {
   background-color: black;
   font-family: "Proxima Nova", "Montserrat", sans-serif;
+  border-spacing: 6px;
   font-size: .9em;
   text-align: left;
   color: white;
@@ -88,7 +83,7 @@ table {
   text-align: left;
   padding-left: 65px;
   position: absolute;
-  top: 1020px;
+  top: 1040px;
   z-index: 4;
 }
 

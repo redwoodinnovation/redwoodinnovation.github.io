@@ -10,7 +10,7 @@
 
 <body>
  
-<div class="column">
+<div>
     <h1>CO<sub>2</sub></h1>
     <table class="table" style="font-size: 0.85em;">
         <thead>
@@ -167,9 +167,9 @@
             }
             </script>
             <script>
-            //--------//
-            // SCHOOL //
-            //--------// 
+            //------------------//
+            // SCHOOL BUILDINGS //
+            //------------------// 
 
             // Svg
             var svg = d3.select("svg"),
@@ -184,13 +184,42 @@
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
+            // var colorScale = d3.scaleThreshold()
+            //     .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+            //     .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
+
+            // var opacityScale = d3.scaleThreshold()
+            //     .domain([1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+            //     .range([0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]); 
 
             // Load external data and boot
             d3.queue()
                 .defer(d3.json, "geojson/schoolbuildings.geojson")
+                // .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.MaxRoomCO2); })
                 .await(ready);
 
             function ready(error, topo) {
+                // // Draw the buildings 
+                // svg.insert("g")
+                //     .attr("class", "building")
+                //     .selectAll("path")
+                //     .data(topo.features)
+                //     .enter()
+                //     .insert("path")
+                //     // draw each room
+                //     .attr("d", d3.geoPath()
+                //         .projection(projection)
+                //     )
+                //     .attr("stroke", "grey")
+                //     .attr("stroke-width", 2)
+                //     .attr("fill-opacity", function(d) {
+                //         d.total = data.get(d.MaxRoomCO2) || 0;
+                //         return opacityScale(d.total);
+                //     }) 
+                //     .attr("fill", function(d) {
+                //         d.total = data.get(d.id) || 0;
+                //         return colorScale(d.total);
+                //     });
 
                 // Draw the map
                 svg.append("g")
