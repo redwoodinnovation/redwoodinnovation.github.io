@@ -41,3 +41,5 @@ A GitHub classroom ventilation prediction webpage displaying:
 ## Instructions
 
 - Forthcoming
+
+[Albany School Grounds in overpass-turbo.eu](images/albany-school-grounds.png)
