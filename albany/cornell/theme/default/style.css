@@ -12,6 +12,10 @@ h1 {
     padding-left: 20px;
 }
 
+.dashed {
+  stroke-dasharray: 5,3;
+}
+
 /* unvisited link */
 a:link {
   color: cyan;

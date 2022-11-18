@@ -262,7 +262,7 @@
             d3.queue()
                 .defer(d3.json, "geojson/grounds.geojson")
                 .defer(d3.json, "geojson/schoolgrounds.geojson")
-                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.SchoolGroundsName, +d.co2ppm); })
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.OSMID, +d.co2ppm); })
                 .await(ready);
 
             function ready(error, grounds, schoolgrounds, topo) {
@@ -279,11 +279,13 @@
                         .projection(projection)
                     )
                     .attr("stroke", "grey")
-                    .attr("stroke-width", 0)
-                    .attr("fill-opacity", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return opacityScale(d.total);
-                    }) 
+                    .attr("stroke-width", 2)
+                    .attr("stroke-dasharray", "18,10,4,7,4,10")
+                    // .attr("fill-opacity", function(d) {
+                    //     d.total = data.get(d.id) || 0;
+                    //     return opacityScale(d.total);
+                    // }) 
+                    .attr("fill-opacity", 0) 
                     .attr("fill", function(d) {
                         d.total = data.get(d.id) || 0;
                         return colorScale(d.total);
@@ -296,13 +298,16 @@
                     .data(schoolgrounds.features)
                     .enter()
                     .insert("path")
-                    // draw each room
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
                     .attr("stroke", "grey")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 0) 
+                    // .attr("fill-opacity", 0) 
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    }) 
                     .attr("fill", function(d) {
                         d.total = data.get(d.id) || 0;
                         return colorScale(d.total);
