@@ -5,9 +5,21 @@ api = overpass.API(timeout=500)
 
 # api.get already returns a FeatureCollection, a GeoJSON type
 res = api.get("""
-    (way["highway"](37.8883006925662,-122.29650825262071,37.890997478019,-122.2946360707283);
-  relation["highway"](37.8883006925662,-122.29650825262071,37.890997478019,-122.2946360707283);
-    );
+  nwr(37.8885,-122.2966,37.8906,-122.2945)->.all;
+  (
+    way.all[highway];
+    nwr.all[leisure=swimming_pool];
+    nwr.all[leisure=track];
+    nwr.all[leisure=pitch];
+    nwr.all[leisure=sports_center];
+    nwr.all[service=driveway];
+    nwr.all[man_made=flagpole];
+    nwr.all["garden:type"="community"];
+    nwr.all["garden:type"="school"];
+    nwr.all[leisure=garden];
+    nwr.all[landuse=allotments];
+    nwr.all[barrier=gate];  
+  ); 
 """, verbosity='geom')
 
 # dump as file, if you want to save it in file
