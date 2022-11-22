@@ -330,6 +330,7 @@
                     )
                     .attr("stroke", "grey")
                     .attr("stroke-width", 2)
+                    // .attr("visibility", "hidden")
                     .attr("fill-opacity", function(d) {
                         d.total = data.get(d.id) || 0;
                         return opacityScale(d.total);
@@ -349,6 +350,19 @@
                     d3.selectAll(".building_min").attr("visibility", "hidden");
                     }
                 };
+
+               // building_min_Checkbox.onchange = toggleVisibility;
+
+               // function toggleVisibility() { 
+               //      if (this.checked) {
+               //      d3.selectAll(".building_min").attr("visibility", "visible");
+               //      } else {
+               //      d3.selectAll(".building_min").attr("visibility", "hidden");
+               //      }
+               //  }
+
+               //  toggleVisibility();
+
             </script>
             <script>
             //---------//
