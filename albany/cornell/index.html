@@ -132,10 +132,11 @@
         </div>
         <div id="map">
             <svg id="my_dataviz" width="700" height="810"></svg>
+      
             <script>
-            //------//
-            // GRID //
-            //------// 
+            //-------------------------------//
+            // BACKGROUND OSM OBJECTS & GRID //
+            //-------------------------------// 
 
             // Svg
             var svg = d3.select("svg"),
@@ -154,17 +155,24 @@
             // Load external data and boot
             d3.queue()
                 .defer(d3.json, "geojson/grid.geojson")
+                .defer(d3.json, "geojson/highways.geojson")
+                .defer(d3.json, "geojson/service.geojson")
+                .defer(d3.json, "geojson/garden.geojson")
+                .defer(d3.json, "geojson/leisure.geojson")
+                .defer(d3.json, "geojson/waterway.geojson")
+                .defer(d3.json, "geojson/barrier.geojson")
+                .defer(d3.json, "geojson/landuse.geojson")
+                .defer(d3.json, "geojson/trees.geojson")
                 .await(ready);
 
-            function ready(error, topo) {
+            function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse) {
 
-                // Draw the map
+                // Draw the grid 
                 svg.append("g")
                     .selectAll("path")
-                    .data(topo.features)
+                    .data(grid.features)
                     .enter()
                     .append("path")
-                    // draw each highway
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
@@ -172,48 +180,101 @@
                     .attr("stroke", "grey")
                     .attr("stroke-width", 1)
                     .attr("fill-opacity", 0);
-            }
 
-            </script>
-            <script>
-            //----------//
-            // HIGHWAYS //
-            //----------// 
-
-            // Svg
-            var svg = d3.select("svg"),
-                width = +svg.attr("width"),
-                height = +svg.attr("height");
-
-            // Map, projection, and centerpoint
-            var path = d3.geoPath();
-            var projection = d3.geoMercator()
-                .scale(21000000) // Zoom
-                .center([-122.29576905, 37.89007]) // Geolocated centerpoint
-                .translate([width / 3, height / 10]);
-
-            var data = d3.map();
-
-            // Load external data and boot
-            d3.queue()
-                .defer(d3.json, "geojson/highways.geojson")
-                .await(ready);
-
-            function ready(error, topo) {
-
-                // Draw the map
+                // Draw the highways 
                 svg.append("g")
                     .selectAll("path")
-                    .data(topo.features)
+                    .data(highways.features)
                     .enter()
                     .append("path")
-                    // draw each highway
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
                     .attr("stroke", "grey")
                     .attr("stroke-width", 8)
                     .attr("fill-opacity", 0.2);
+
+                // Draw service 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(service.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 5)
+                    .attr("fill-opacity", 0.2);
+
+                // Draw garden 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(garden.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "lime")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0.2);
+
+                // Draw leisure 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(leisure.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "#D2B48C")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0);
+
+                // Draw waterway 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(waterway.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 8)
+                    .attr("fill-opacity", 0.5);
+
+                // Draw barrier 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(barrier.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "red")
+                    .attr("fill", "red")
+                    .attr("stroke-width", 3)
+                    .attr("fill-opacity", 0.5);
+
+                // Draw landuse 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(landuse.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "yellow")
+                    .attr("fill", "yellow")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0);
+
             }
 
             </script>
@@ -398,7 +459,7 @@
                 .await(ready);
 
             function ready(error, schoolgrounds, topo) {
-            // function ready(error, grounds, schoolgrounds, topo) {
+            // function ready(error, grounds, schoolgrounds) {
 
                 // // Draw the property line 
                 // svg.insert("g")
@@ -492,7 +553,7 @@
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.RoomNumber, +d.co2ppm); })
                 .await(ready);
 
-            function ready(error, level0, level1, topo) {
+            function ready(error, level0, level1) {
                 if (error) {
                     console.log(error);
                 };
@@ -940,7 +1001,7 @@
                 // Add circles:
                 setTimeout(function() {
                     svg
-                        .selectAll("myCircles")
+                        .selectAll("circle")
                         .data(data.sort(function(a, b) { return +b.CO2ppm - +a.CO2ppm }).filter(function(d, i) { return i < 10 }))
                         .enter()
                         .append("circle")
@@ -969,7 +1030,7 @@
 
             }
             </script>
-           <!--  <script>
+            <!-- <script>
             //-------------------//
             // ENTRANCES & TREES //
             //-------------------// 
@@ -991,7 +1052,7 @@
            
             svg
                 .selectAll("circle")
-                .data(xml.documentElement.getElementsByTagName("node"))
+                .data(xml.documentElement.getElementsByTargName("node"))
                 .enter()
                 .insert("circle")
                 .each(function (d) {

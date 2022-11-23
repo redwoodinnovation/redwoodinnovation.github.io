@@ -3,12 +3,12 @@ import geojson
 
 api = overpass.API(timeout=500)
 
-# api.get already returns a FeatureCollection, a GeoJSON type
+# api.get already returns a FeatureCollection
 res = api.get("""
     (node["entrance"](37.8883006925662,-122.29650825262071,37.890997478019,-122.2946360707283);
     );
 """, verbosity='geom')
 
-# dump as file, if you want to save it in file
+# dump as a geojson file
 with open("albany/cornell/geojson/entrances.geojson",mode="w") as f:
   geojson.dump(res,f)
