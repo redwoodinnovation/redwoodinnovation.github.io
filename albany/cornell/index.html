@@ -4,7 +4,7 @@
 <head>
     <script src="js/d3.v4.js"></script>
     <script src="js/papaparse.min.js"></script>
-    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <!-- <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script> -->
     <link rel="stylesheet" type="text/css" href="theme/default/style.css">
 </head>
 
@@ -70,35 +70,35 @@
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/1i7I8GU8UnDoeGHtY4Pu45vd546xVyDjxp0Mxk5vXqFk/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Outdoor 4PM</a></td>
                     <td><label class="switch">
-                            <input id="picarro_toggle" type="checkbox" checked>
+                            <input id="picarro_toggle" type="checkbox" checked="true" />
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Max</a></td>
                     <td><label class="switch">
-                            <input id="building_toggle_max" type="checkbox" checked>
+                            <input id="building_toggle_max" type="checkbox" checked="true" />
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Min</a></td>
                     <td><label class="switch">
-                            <input id="building_toggle_min" type="checkbox" checked>
+                            <input id="building_toggle_min" type="checkbox" checked="true"/>
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 1</a></td>
                     <td><label class="switch">
-                            <input id="l1_toggle" type="checkbox" checked>
+                            <input id="l1_toggle" type="checkbox" checked="true" />
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 0</a></td>
                     <td><label class="switch">
-                            <input id="l0_toggle" type="checkbox" checked>
+                            <input id="l0_toggle" type="checkbox" checked="true" />
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
@@ -162,10 +162,10 @@
                 .defer(d3.json, "geojson/waterway.geojson")
                 .defer(d3.json, "geojson/barrier.geojson")
                 .defer(d3.json, "geojson/landuse.geojson")
-                .defer(d3.json, "geojson/trees.geojson")
+                .defer(d3.json, "geojson/natural.geojson")
                 .await(ready);
 
-            function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse) {
+            function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse, natural) {
 
                 // Draw the grid 
                 svg.append("g")
@@ -275,6 +275,20 @@
                     .attr("stroke-width", 2)
                     .attr("fill-opacity", 0);
 
+                // Draw natural 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(natural.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "green")
+                    .attr("fill", "green")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0.5);
+
             }
 
             </script>
@@ -380,6 +394,7 @@
             function ready(error, topo) {
                 
                 // Draw the buildings 
+                // setTimeout(function() {
                 svg.append("g")
                     .attr("class", "building_min")
                     .selectAll("path")
@@ -402,27 +417,28 @@
                     });
             }
 
+            d3.selectAll(".building_min").attr("visibility", "visible");
+
             var building_min_Checkbox = document.querySelector('input[id="building_toggle_min"]');
 
-                building_min_Checkbox.onchange = function() {
-                    if (this.checked) {
-                    d3.selectAll(".building_min").attr("visibility", "visible");
-                    } else {
-                    d3.selectAll(".building_min").attr("visibility", "hidden");
-                    }
-                };
-
-               // building_min_Checkbox.onchange = toggleVisibility;
-
-               // function toggleVisibility() { 
+               //  building_min_Checkbox.onchange = function() {
                //      if (this.checked) {
                //      d3.selectAll(".building_min").attr("visibility", "visible");
                //      } else {
                //      d3.selectAll(".building_min").attr("visibility", "hidden");
                //      }
-               //  }
+               //  };
 
-               //  toggleVisibility();
+               building_min_Checkbox.onchange = toggleVisibility;
+
+               function toggleVisibility() { 
+                    if (this.checked) {
+                    d3.selectAll(".building_min").attr("visibility", "visible");
+                    } else {
+                    d3.selectAll(".building_min").attr("visibility", "hidden");
+                    }
+                }
+
 
             </script>
             <script>
