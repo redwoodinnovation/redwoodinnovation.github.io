@@ -1,7 +1,6 @@
 name: Scheduled overpass api query for highways
 
 on:
-  push:
   schedule:
     - cron: '15 0 * * *' # Scheduled for 00:15.  
 
@@ -20,10 +19,10 @@ jobs:
           cache: 'pip'
 
       - name: install python packages
-        run: pip install -r python-actions/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: execute py script
-        run: python python-actions/barrier.py
+        run: python barrier.py
 
       - name: commit files
         run: |

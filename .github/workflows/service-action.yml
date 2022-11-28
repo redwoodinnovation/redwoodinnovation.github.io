@@ -19,10 +19,10 @@ jobs:
           cache: 'pip'
 
       - name: install python packages
-        run: pip install -r python-actions/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: execute py script
-        run: python python-actions/service.py
+        run: python service.py
 
       - name: commit files
         run: |
