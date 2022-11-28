@@ -10,5 +10,5 @@ res = api.get("""
 """, verbosity='geom')
 
 # dump as a geojson file
-with open("albany/cornell/geojson/schoolbuildings.geojson",mode="w") as f:
+with open("../albany/cornell/geojson/schoolbuildings.geojson",mode="w") as f:
   geojson.dump(res,f)

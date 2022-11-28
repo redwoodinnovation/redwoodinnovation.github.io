@@ -2,7 +2,7 @@ name: Scheduled overpass api query for highways
 
 on:
   schedule:
-    - cron: '5 */8 * * *' # Scheduled for minute 5 past every 8th hour.  
+    - cron: '5 0 * * *' # Scheduled for 00:05.  
 
 jobs:
   build:
@@ -19,10 +19,10 @@ jobs:
           cache: 'pip'
 
       - name: install python packages
-        run: pip install -r requirements.txt
+        run: pip install -r python-actions/requirements.txt
 
       - name: execute py script
-        run: python highways.py
+        run: python python-actions/highways.py
 
       - name: commit files
         run: |

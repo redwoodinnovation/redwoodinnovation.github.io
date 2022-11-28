@@ -2,7 +2,7 @@ name: Scheduled overpass api query for school grounds
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Scheduled for 00:00.   
+    - cron: '50 0 * * *' # Scheduled for 00:50.   
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         run: pip install -r python-actions/requirements.txt
 
       - name: execute py script
-        run: python python-actions/schoolgrounds.py
+        run: python python-actions/waterway.py
 
       - name: commit files
         run: |

@@ -2,7 +2,7 @@ name: Scheduled overpass api query for school buildings
 
 on:
   schedule:
-    - cron: '10 */8 * * *' # Scheduled for minute 10 past every 8th hour.   
+    - cron: '10 0 * * *' # Scheduled for 00:10.   
 
 jobs:
   build:
@@ -19,10 +19,10 @@ jobs:
           cache: 'pip'
 
       - name: install python packages
-        run: pip install -r requirements.txt
+        run: pip install -r python-actions/requirements.txt
 
       - name: execute py script
-        run: python schoolbuildings.py
+        run: python python-actions/schoolbuildings.py
 
       - name: commit files
         run: |

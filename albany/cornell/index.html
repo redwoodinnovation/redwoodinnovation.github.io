@@ -163,9 +163,10 @@
                 .defer(d3.json, "geojson/barrier.geojson")
                 .defer(d3.json, "geojson/landuse.geojson")
                 .defer(d3.json, "geojson/natural.geojson")
+                .defer(d3.json, "geojson/entrances.geojson")
                 .await(ready);
 
-            function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse, natural) {
+            function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse, natural, entrances) {
 
                 // Draw the grid 
                 svg.append("g")
@@ -287,7 +288,21 @@
                     .attr("stroke", "green")
                     .attr("fill", "green")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 0.5);
+                    .attr("fill-opacity", 1);
+
+                // Draw entrances 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(entrances.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "blue")
+                    .attr("fill", "blue")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1);
 
             }
 

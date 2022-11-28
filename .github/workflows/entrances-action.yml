@@ -1,8 +1,8 @@
-name: Scheduled overpass api query for school grounds
+name: Scheduled overpass api query for highways
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Scheduled for 00:00.   
+    - cron: '20 0 * * *' # Scheduled for 00:20.  
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         run: pip install -r python-actions/requirements.txt
 
       - name: execute py script
-        run: python python-actions/schoolgrounds.py
+        run: python python-actions/entrances.py
 
       - name: commit files
         run: |
