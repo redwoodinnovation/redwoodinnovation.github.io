@@ -159,6 +159,7 @@
                 .defer(d3.json, "../geojson/service.geojson")
                 .defer(d3.json, "../geojson/garden.geojson")
                 .defer(d3.json, "../geojson/leisure.geojson")
+                .defer(d3.json, "../geojson/water.geojson")
                 .defer(d3.json, "../geojson/waterway.geojson")
                 .defer(d3.json, "../geojson/barrier.geojson")
                 .defer(d3.json, "../geojson/landuse.geojson")
@@ -167,21 +168,8 @@
                 .defer(d3.json, "../geojson/trees.geojson")
                 .await(ready);
 
-            function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse, natural, entrances, trees) {
-
-                // Draw natural 
-                svg.append("g")
-                    .selectAll("path")
-                    .data(natural.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "green")
-                    .attr("fill", "green")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 0.2);
+            // function ready(error, grid, highways, service, garden, leisure, water, barrier, landuse, natural, entrances, trees) {
+            function ready(error, grid, highways, service, garden, leisure, water, waterway, barrier, landuse, natural, entrances, trees) {
 
                 // Draw the grid 
                 svg.append("g")
@@ -197,6 +185,48 @@
                     .attr("stroke-width", 1)
                     .attr("fill-opacity", 0);
 
+                // Draw natural 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(natural.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "green")
+                    .attr("fill", "green")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1);
+
+                // Draw water 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(water.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 6) 
+                    .attr("fill-opacity", 1);
+
+                // Draw waterways 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(waterway.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 6) 
+                    .attr("fill-opacity", 0);
+
                 // Draw the highways 
                 svg.append("g")
                     .selectAll("path")
@@ -207,7 +237,7 @@
                         .projection(projection)
                     )
                     .attr("stroke", "grey")
-                    .attr("stroke-width", 8)
+                    .attr("stroke-width", 2)
                     .attr("fill-opacity", 0.2);
 
                 // Draw service 
@@ -220,7 +250,7 @@
                         .projection(projection)
                     )
                     .attr("stroke", "grey")
-                    .attr("stroke-width", 5)
+                    .attr("stroke-width", 1)
                     .attr("fill-opacity", 0.2);
 
                 // Draw garden 
@@ -249,20 +279,6 @@
                     .attr("stroke-width", 2)
                     .attr("fill-opacity", 0);
 
-                // Draw waterway 
-                svg.append("g")
-                    .selectAll("path")
-                    .data(waterway.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "cyan")
-                    .attr("fill", "cyan")
-                    .attr("stroke-width", 8)
-                    .attr("fill-opacity", 0);
-
                 // Draw barrier 
                 svg.append("g")
                     .selectAll("path")
@@ -275,7 +291,7 @@
                     .attr("stroke", "red")
                     .attr("fill", "red")
                     .attr("stroke-width", 3)
-                    .attr("fill-opacity", 0.5);
+                    .attr("fill-opacity", 0);
 
                 // Draw landuse 
                 svg.append("g")
