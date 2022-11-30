@@ -500,7 +500,6 @@
 
             // Load external data and boot
             d3.queue()
-                // .defer(d3.json, "geojson/grounds.geojson")
                 .defer(d3.json, "geojson/schoolgrounds.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.OSMID, +d.co2ppm); })
                 .await(ready);

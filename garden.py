@@ -7,9 +7,9 @@ api = overpass.API(timeout=500)
 res = api.get("""
     area(id:3602999142);
   (
-    nwr["garden"](area);
     nwr["leisure"="garden"](area);
     nwr["garden:type"](area);
+    nwr["garden"](area);
   );
 """, verbosity='geom')
 
