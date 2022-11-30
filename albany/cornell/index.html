@@ -81,13 +81,13 @@
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
-                <tr>
+               <!--  <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Min</a></td>
                     <td><label class="switch">
-                            <input id="building_toggle_min" type="checkbox" checked="true"/>
+                            <input id="building_toggle_min" type="checkbox" />
                             <div class="slider co2"></div>
                         </label></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 1</a></td>
                     <td><label class="switch">
@@ -154,17 +154,17 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "geojson/grid.geojson")
-                .defer(d3.json, "geojson/highways.geojson")
-                .defer(d3.json, "geojson/service.geojson")
-                .defer(d3.json, "geojson/garden.geojson")
-                .defer(d3.json, "geojson/leisure.geojson")
-                .defer(d3.json, "geojson/waterway.geojson")
-                .defer(d3.json, "geojson/barrier.geojson")
-                .defer(d3.json, "geojson/landuse.geojson")
-                .defer(d3.json, "geojson/natural.geojson")
-                .defer(d3.json, "geojson/entrances.geojson")
-                .defer(d3.json, "geojson/trees.geojson")
+                .defer(d3.json, "../geojson/grid.geojson")
+                .defer(d3.json, "../geojson/highways.geojson")
+                .defer(d3.json, "../geojson/service.geojson")
+                .defer(d3.json, "../geojson/garden.geojson")
+                .defer(d3.json, "../geojson/leisure.geojson")
+                .defer(d3.json, "../geojson/waterway.geojson")
+                .defer(d3.json, "../geojson/barrier.geojson")
+                .defer(d3.json, "../geojson/landuse.geojson")
+                .defer(d3.json, "../geojson/natural.geojson")
+                .defer(d3.json, "../geojson/entrances.geojson")
+                .defer(d3.json, "../geojson/trees.geojson")
                 .await(ready);
 
             function ready(error, grid, highways, service, garden, leisure, waterway, barrier, landuse, natural, entrances, trees) {
@@ -289,7 +289,7 @@
                     .attr("stroke", "green")
                     .attr("fill", "green")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill-opacity", 0.2);
 
                 // Draw trees 
                 svg.append("g")
@@ -350,7 +350,7 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "geojson/schoolbuildings.geojson")
+                .defer(d3.json, "../geojson/schoolbuildings.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MaxRoomCO2, +d.MinRoomCO2); })
                 .await(ready);
 
@@ -389,7 +389,7 @@
                 };
 
             </script>
-            <script>
+            <!-- <script>
             //----------------------//
             // SCHOOL BUILDINGS MIN //
             //----------------------// 
@@ -417,7 +417,7 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "geojson/schoolbuildings.geojson")
+                .defer(d3.json, "../geojson/schoolbuildings.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MinRoomCO2); })
                 .await(ready);
 
@@ -436,7 +436,7 @@
                     )
                     .attr("stroke", "grey")
                     .attr("stroke-width", 2)
-                    // .attr("visibility", "hidden")
+                    .attr("visibility", "hidden")
                     .attr("fill-opacity", function(d) {
                         d.total = data.get(d.id) || 0;
                         return opacityScale(d.total);
@@ -470,7 +470,7 @@
                 }
 
 
-            </script>
+            </script> -->
             <script>
             //---------//
             // GROUNDS //
@@ -499,8 +499,8 @@
 
             // Load external data and boot
             d3.queue()
-                // .defer(d3.json, "geojson/grounds.geojson")
-                .defer(d3.json, "geojson/schoolgrounds.geojson")
+                // .defer(d3.json, "../geojson/grounds.geojson")
+                .defer(d3.json, "../geojson/schoolgrounds.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.OSMID, +d.co2ppm); })
                 .await(ready);
 
@@ -594,8 +594,8 @@
             // Load external data and boot
 
             d3.queue()
-                .defer(d3.json, "geojson/level0.geojson")
-                .defer(d3.json, "geojson/level1.geojson")
+                .defer(d3.json, "../geojson/level0.geojson")
+                .defer(d3.json, "../geojson/level1.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.RoomNumber, +d.co2ppm); })
                 .await(ready);
 
@@ -686,7 +686,7 @@
                 .translate([width / 3, height / 4])
 
             d3.queue()
-                .defer(d3.json, "geojson/grounds.geojson") 
+                .defer(d3.json, "../geojson/grounds.geojson") 
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1224835953&single=true&output=csv") // Location and size
                 .await(ready);
 
@@ -807,7 +807,7 @@
                 .translate([width / 3, height / 4])
 
             d3.queue()
-                .defer(d3.json, "geojson/grounds.geojson")
+                .defer(d3.json, "../geojson/grounds.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1770914976&single=true&output=csv") // Location and size
                 .await(ready);
 
@@ -905,7 +905,7 @@
                 .translate([width / 3, height / 4])
 
             d3.queue()
-                .defer(d3.json, "geojson/grounds.geojson") 
+                .defer(d3.json, "../geojson/grounds.geojson") 
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1464833914&single=true&output=csv") // Location and size
                 .await(ready);
 
@@ -1029,7 +1029,7 @@
                 }
 
             d3.queue()
-                .defer(d3.json, "geojson/grounds.geojson") // Property shape
+                .defer(d3.json, "../geojson/grounds.geojson") // Property shape
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pub?gid=768142103&single=true&output=csv") // Position of circles; sensor data
                 .await(ready);
 

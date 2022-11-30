@@ -5,10 +5,10 @@ api = overpass.API(timeout=500)
 
 # api.get already returns a FeatureCollection
 res = api.get("""
-    (node["entrance"](37.8883006925662,-122.29650825262071,37.890997478019,-122.2946360707283);
-    );
+    area(id:3602999142);
+    node["entrance"](area);
 """, verbosity='geom')
 
 # dump as a geojson file
-with open("albany/cornell/geojson/entrances.geojson",mode="w") as f:
+with open("albany/geojson/entrances.geojson",mode="w") as f:
   geojson.dump(res,f)
