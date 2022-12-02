@@ -111,7 +111,7 @@
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
-               <!--  <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                 <tr>
                     <td>Entrances</td>
                     <td><label class="switch">
@@ -125,7 +125,7 @@
                             <input id="trees_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
-                </tr> -->
+                </tr>
             </table>
         </div>
 
@@ -161,6 +161,8 @@
                 .defer(d3.json, "geojson/leisure.geojson")
                 .defer(d3.json, "geojson/water.geojson")
                 .defer(d3.json, "geojson/waterway.geojson")
+                .defer(d3.json, "geojson/fountain.geojson")
+                .defer(d3.json, "geojson/culvert.geojson")
                 .defer(d3.json, "geojson/barrier.geojson")
                 .defer(d3.json, "geojson/landuse.geojson")
                 .defer(d3.json, "geojson/natural.geojson")
@@ -168,8 +170,7 @@
                 .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=1526174802&single=true&output=tsv")
                 .await(ready);
 
-            // function ready(error, grid, highways, service, garden, leisure, water, barrier, landuse, natural, entrances, trees) {
-            function ready(error, highways, service, garden, leisure, water, waterway, barrier, landuse, natural, entrances, trees) {
+            function ready(error, highways, service, garden, leisure, water, waterway, fountain, culvert, barrier, landuse, natural, entrances, trees) {
 
                 // // Draw the grid 
                 // svg.append("g")
@@ -223,7 +224,33 @@
                         .projection(projection)
                     )
                     .attr("stroke", "cyan")
+                    .attr("stroke-width", 6) 
+                    .attr("fill-opacity", 0);
+
+                // Draw fountains 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(fountain.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
                     .attr("fill", "cyan")
+                    .attr("stroke-width", 2) 
+                    .attr("fill-opacity", 1);
+
+                // Draw culverts 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(culvert.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
                     .attr("stroke-width", 6) 
                     .attr("fill-opacity", 0);
 
@@ -262,9 +289,9 @@
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
-                    .attr("stroke", "lime")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill", "lime")
+                    .attr("fill-opacity", 1)
+                    .attr("stroke-width", 0);
 
                 // Draw leisure 
                 svg.append("g")
@@ -319,7 +346,8 @@
                     .attr("stroke", "#006400")
                     .attr("fill", "#006400")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill-opacity", 1)
+                    .attr("class", "trees");
 
                 // Draw entrances 
                 svg.append("g")
@@ -333,7 +361,27 @@
                     .attr("stroke", "blue")
                     .attr("fill", "blue")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill-opacity", 1)
+                    .attr("class", "entries");
+            
+                var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
+                var trees_Checkbox = document.querySelector('input[id="trees_toggle"]');
+
+                entries_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".entries").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".entries").attr("visibility", "hidden");
+                    }
+                };
+
+                trees_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".trees").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".trees").attr("visibility", "hidden");
+                    }
+                };
 
             }
 

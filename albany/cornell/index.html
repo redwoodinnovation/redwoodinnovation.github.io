@@ -111,7 +111,7 @@
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
-               <!--  <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                 <tr>
                     <td>Entrances</td>
                     <td><label class="switch">
@@ -125,7 +125,7 @@
                             <input id="trees_toggle" type="checkbox" checked>
                             <div class="slider co2"></div>
                         </label></td>
-                </tr> -->
+                </tr>
             </table>
         </div>
 
@@ -161,6 +161,7 @@
                 .defer(d3.json, "../geojson/leisure.geojson")
                 .defer(d3.json, "../geojson/water.geojson")
                 .defer(d3.json, "../geojson/waterway.geojson")
+                .defer(d3.json, "../geojson/fountain.geojson")
                 .defer(d3.json, "../geojson/barrier.geojson")
                 .defer(d3.json, "../geojson/landuse.geojson")
                 .defer(d3.json, "../geojson/natural.geojson")
@@ -169,7 +170,7 @@
                 .await(ready);
 
             // function ready(error, grid, highways, service, garden, leisure, water, barrier, landuse, natural, entrances, trees) {
-            function ready(error, grid, highways, service, garden, leisure, water, waterway, barrier, landuse, natural, entrances, trees) {
+            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances, trees) {
 
                 // Draw the grid 
                 svg.append("g")
@@ -227,6 +228,20 @@
                     .attr("stroke-width", 6) 
                     .attr("fill-opacity", 0);
 
+                // Draw fountains 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(fountain.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 2) 
+                    .attr("fill-opacity", 1);
+
                 // Draw the highways 
                 svg.append("g")
                     .selectAll("path")
@@ -262,9 +277,9 @@
                     .attr("d", d3.geoPath()
                         .projection(projection)
                     )
-                    .attr("stroke", "lime")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill", "lime")
+                    .attr("fill-opacity", 1)
+                    .attr("stroke-width", 0);
 
                 // Draw leisure 
                 svg.append("g")
@@ -319,7 +334,8 @@
                     .attr("stroke", "#006400")
                     .attr("fill", "#006400")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill-opacity", 1)
+                    .attr("class", "trees");
 
                 // Draw entrances 
                 svg.append("g")
@@ -333,7 +349,27 @@
                     .attr("stroke", "blue")
                     .attr("fill", "blue")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1);
+                    .attr("fill-opacity", 1)
+                    .attr("class", "entries");
+            
+                var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
+                var trees_Checkbox = document.querySelector('input[id="trees_toggle"]');
+
+                entries_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".entries").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".entries").attr("visibility", "hidden");
+                    }
+                };
+
+                trees_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".trees").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".trees").attr("visibility", "hidden");
+                    }
+                };
 
             }
 
@@ -455,8 +491,8 @@
                 .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
 
             var opacityScale = d3.scaleThreshold()
-                .domain([100, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
-                .range([0.0, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]); 
+                .domain([99, 100, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0, 0, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]); 
 
             // Load external data and boot
             d3.queue()
@@ -466,7 +502,7 @@
 
             function ready(error, topo) {
                 
-                // Draw the buildings 
+                // Draw the building outlines 
                 svg.append("g")
                     .attr("class", "building_max")
                     .selectAll("path")
@@ -478,13 +514,26 @@
                     )
                     .attr("stroke", "grey")
                     .attr("stroke-width", 2)
-                    .attr("fill-opacity", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return opacityScale(d.total);
-                    }) 
+                    .attr("fill-opacity", 0);
+
+                // Draw the building fill 
+                svg.append("g")
+                    .attr("class", "building_max")
+                    .selectAll("path")
+                    .data(topo.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke-width", 0)
                     .attr("fill", function(d) {
                         d.total = data.get(d.id) || 0;
                         return colorScale(d.total);
+                    })
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
                     });
             }
 
