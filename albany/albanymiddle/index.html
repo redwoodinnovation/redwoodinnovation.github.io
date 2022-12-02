@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <script src="js/d3.v4.js"></script>
+    <script src="js/papaparse.min.js"></script>
+    <!-- <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="theme/default/style.css">
+</head>
+
+<body>
+ 
+<div>
+    <h1>CO<sub>2</sub></h1>
+    <table class="table" style="font-size: 0.85em;">
+        <thead>
+            <tr id="tableHeader2">
+            </tr>
+        </thead>
+        <tbody id="tableBody2">
+        </tbody>
+    </table>
+    <script>
+        function createDataElement(htmlTag, innerText, idParent) {
+            let node = document.createElement(htmlTag);
+            let textnode = document.createTextNode(innerText);
+            node.appendChild(textnode);
+            document.getElementById(idParent).appendChild(node);
+        }
+    
+        function createHeaderElement(columnText) {
+            createDataElement("th", columnText, "tableHeader2");
+        }
+    
+        function createCellData(rowIndex, dataIndex, cellText) {
+            if(dataIndex === 0) {
+                let node = document.createElement("tr");
+                node.setAttribute("id", "row" + rowIndex);
+                document.getElementById("tableBody2").appendChild(node);
+    
+                createDataElement("td", cellText, "row" + rowIndex);
+            } else {
+                createDataElement("td", cellText, "row" + rowIndex);
+            }
+        }
+    
+      Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vRg72CoHJy60_V9F0wA6S_yOUR2jsag1D9yjEFIYgqDZ2JqvUggXgh0uDGLHRaZNQ-8WUV9AxtQPzAT/pub?gid=1180288724&single=true&output=csv', {
+            header: false,
+            download: true,
+            complete: function(results) {
+                for(let i = 0; i < results.data.length; i++) {
+                    if(i === 0) {
+                        for(let j = 0; j < results.data[i].length; j++) {
+                            createHeaderElement(results.data[i][j]);
+                        }
+                    }
+                    if(i > 0) {
+                        for(let j = 0; j < results.data[i].length; j++) {
+                            createCellData(i, j, results.data[i][j]);
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+</div>
+    <div id="toggleContainer">
+            <table style="font-size: .85em;">
+                <tr>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1i7I8GU8UnDoeGHtY4Pu45vd546xVyDjxp0Mxk5vXqFk/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Outdoor 4PM</a></td>
+                    <td><label class="switch">
+                            <input id="picarro_toggle" type="checkbox" checked="true" />
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr>
+                <tr>
+                    <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Max</a></td>
+                    <td><label class="switch">
+                            <input id="building_toggle_max" type="checkbox" checked="true" />
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr>
+               <!--  <tr>
+                    <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Min</a></td>
+                    <td><label class="switch">
+                            <input id="building_toggle_min" type="checkbox" />
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr> -->
+                <tr>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 1</a></td>
+                    <td><label class="switch">
+                            <input id="l1_toggle" type="checkbox" checked="true" />
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr>
+                <tr>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 0</a></td>
+                    <td><label class="switch">
+                            <input id="l0_toggle" type="checkbox" checked="true" />
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr>
+                <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                <th>Crowdsense History</th>
+                <tr>
+                    <td><a href="https://docs.google.com/spreadsheets/d/1D4DeVEVcacgG_N9Oe2uMkp2ivCZdjjL2Fe1NE07ZDWw/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Crowdsense</a></td>
+                    <td><label class="switch">
+                            <input id="crowdco2_toggle" type="checkbox" checked>
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr>
+               <!--  <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                <tr>
+                    <td>Entrances</td>
+                    <td><label class="switch">
+                            <input id="entries_toggle" type="checkbox" checked>
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr>
+                <tr>
+                    <td>Trees</td>
+                    <td><label class="switch">
+                            <input id="trees_toggle" type="checkbox" checked>
+                            <div class="slider co2"></div>
+                        </label></td>
+                </tr> -->
+            </table>
+        </div>
+
+        </div>
+        <div id="map">
+            <svg id="my_dataviz" width="700" height="810"></svg>
+      
+            <script>
+            //-------------------------------//
+            // BACKGROUND OSM OBJECTS & GRID //
+            //-------------------------------// 
+
+            // Svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map, projection, and centerpoint
+            var path = d3.geoPath();
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 10]);
+
+            var data = d3.map();
+
+            // Load external data and boot
+            d3.queue()
+                .defer(d3.json, "../geojson/grid.geojson")
+                .defer(d3.json, "../geojson/highways.geojson")
+                .defer(d3.json, "../geojson/service.geojson")
+                .defer(d3.json, "../geojson/garden.geojson")
+                .defer(d3.json, "../geojson/leisure.geojson")
+                .defer(d3.json, "../geojson/water.geojson")
+                .defer(d3.json, "../geojson/waterway.geojson")
+                .defer(d3.json, "../geojson/barrier.geojson")
+                .defer(d3.json, "../geojson/landuse.geojson")
+                .defer(d3.json, "../geojson/natural.geojson")
+                .defer(d3.json, "../geojson/entrances.geojson")
+                .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=1526174802&single=true&output=tsv")
+                .await(ready);
+
+            // function ready(error, grid, highways, service, garden, leisure, water, barrier, landuse, natural, entrances, trees) {
+            function ready(error, grid, highways, service, garden, leisure, water, waterway, barrier, landuse, natural, entrances, trees) {
+
+                // Draw the grid 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(grid.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke-dasharray", "2")
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 1)
+                    .attr("fill-opacity", 0);
+
+                // Draw natural 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(natural.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "green")
+                    .attr("fill", "green")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1);
+
+                // Draw water 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(water.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 6) 
+                    .attr("fill-opacity", 1);
+
+                // Draw waterways 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(waterway.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "cyan")
+                    .attr("fill", "cyan")
+                    .attr("stroke-width", 6) 
+                    .attr("fill-opacity", 0);
+
+                // Draw the highways 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(highways.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0.2);
+
+                // Draw service 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(service.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 1)
+                    .attr("fill-opacity", 0.2);
+
+                // Draw garden 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(garden.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "lime")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1);
+
+                // Draw leisure 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(leisure.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "#D2B48C")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0);
+
+                // Draw barrier 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(barrier.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "red")
+                    .attr("fill", "red")
+                    .attr("stroke-width", 3)
+                    .attr("fill-opacity", 0);
+
+                // Draw landuse 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(landuse.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "yellow")
+                    .attr("fill", "yellow")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 0);
+
+                // Draw trees 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(trees.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "#006400")
+                    .attr("fill", "#006400")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1);
+
+                // Draw entrances 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(entrances.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "blue")
+                    .attr("fill", "blue")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1);
+
+            }
+
+            </script>
+            <script>
+            //---------//
+            // GROUNDS //
+            //---------// 
+
+            // Svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map, projection, and centerpoint
+            var path = d3.geoPath();
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 10]);
+
+            var data = d3.map();
+            var colorScale = d3.scaleThreshold()
+                .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+                .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
+
+            var opacityScale = d3.scaleThreshold()
+                .domain([1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]);
+
+            // Load external data and boot
+            d3.queue()
+                // .defer(d3.json, "../geojson/grounds.geojson")
+                .defer(d3.json, "../geojson/schoolgrounds.geojson")
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.OSMID, +d.co2ppm); })
+                .await(ready);
+
+            function ready(error, schoolgrounds, topo) {
+            // function ready(error, grounds, schoolgrounds) {
+
+                // // Draw the property line 
+                // svg.insert("g")
+                //     .attr("class", "picarro")
+                //     .selectAll("path")
+                //     .data(grounds.features)
+                //     .enter()
+                //     .insert("path")
+                //     // draw each room
+                //     .attr("d", d3.geoPath()
+                //         .projection(projection)
+                //     )
+                //     .attr("stroke", "grey")
+                //     .attr("stroke-width", 2)
+                //     .attr("stroke-dasharray", "18,10,4,7,4,10")
+                //     // .attr("fill-opacity", function(d) {
+                //     //     d.total = data.get(d.id) || 0;
+                //     //     return opacityScale(d.total);
+                //     // }) 
+                //     .attr("fill-opacity", 0) 
+                //     .attr("fill", function(d) {
+                //         d.total = data.get(d.id) || 0;
+                //         return colorScale(d.total);
+                //     });
+            
+                // Draw the OSM grounds 
+                svg.insert("g")
+                    .attr("class", "picarro")
+                    .selectAll("path")
+                    .data(schoolgrounds.features)
+                    .enter()
+                    .insert("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 2)
+                    // .attr("fill-opacity", 0) 
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    }) 
+                    .attr("fill", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    });
+            }
+
+            var picarro_Checkbox = document.querySelector('input[id="picarro_toggle"]');
+
+            picarro_Checkbox.onchange = function() {
+                if (this.checked) {
+                    d3.selectAll(".picarro").attr("visibility", "visible");
+                } else {
+                    d3.selectAll(".picarro").attr("visibility", "hidden");
+                }
+            };
+            
+            </script>
+            <script>
+            //----------------------//
+            // SCHOOL BUILDINGS MAX //
+            //----------------------// 
+
+            // Svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map, projection, and centerpoint
+            var path = d3.geoPath();
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 10]);
+
+            var data = d3.map();
+            var colorScale = d3.scaleThreshold()
+                .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+                .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
+
+            var opacityScale = d3.scaleThreshold()
+                .domain([100, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0.0, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]); 
+
+            // Load external data and boot
+            d3.queue()
+                .defer(d3.json, "../geojson/schoolbuildings.geojson")
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MaxRoomCO2, +d.MinRoomCO2); })
+                .await(ready);
+
+            function ready(error, topo) {
+                
+                // Draw the buildings 
+                svg.append("g")
+                    .attr("class", "building_max")
+                    .selectAll("path")
+                    .data(topo.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    }) 
+                    .attr("fill", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    });
+            }
+
+            var building_Checkbox = document.querySelector('input[id="building_toggle_max"]');
+
+                building_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".building_max").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".building_max").attr("visibility", "hidden");
+                    }
+                };
+
+            </script>
+            <!-- <script>
+            //----------------------//
+            // SCHOOL BUILDINGS MIN //
+            //----------------------// 
+
+            // Svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map, projection, and centerpoint
+            var path = d3.geoPath();
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 10]);
+
+            var data = d3.map();
+            var colorScale = d3.scaleThreshold()
+                .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+                .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
+
+            var opacityScale = d3.scaleThreshold()
+                .domain([100, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0.0, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]); 
+
+            // Load external data and boot
+            d3.queue()
+                .defer(d3.json, "../geojson/schoolbuildings.geojson")
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MinRoomCO2); })
+                .await(ready);
+
+            function ready(error, topo) {
+                
+                // Draw the buildings 
+                // setTimeout(function() {
+                svg.append("g")
+                    .attr("class", "building_min")
+                    .selectAll("path")
+                    .data(topo.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 2)
+                    .attr("visibility", "hidden")
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    }) 
+                    .attr("fill", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    });
+            }
+
+            d3.selectAll(".building_min").attr("visibility", "visible");
+
+            var building_min_Checkbox = document.querySelector('input[id="building_toggle_min"]');
+
+               //  building_min_Checkbox.onchange = function() {
+               //      if (this.checked) {
+               //      d3.selectAll(".building_min").attr("visibility", "visible");
+               //      } else {
+               //      d3.selectAll(".building_min").attr("visibility", "hidden");
+               //      }
+               //  };
+
+               building_min_Checkbox.onchange = toggleVisibility;
+
+               function toggleVisibility() { 
+                    if (this.checked) {
+                    d3.selectAll(".building_min").attr("visibility", "visible");
+                    } else {
+                    d3.selectAll(".building_min").attr("visibility", "hidden");
+                    }
+                }
+
+
+            </script> -->
+            
+            <script>
+            //-------//
+            // ROOMS //
+            //-------// 
+
+            // Svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map, projection, and centerpoint
+            var path = d3.geoPath();
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 10]);
+
+            var data = d3.map();
+            var colorScale = d3.scaleThreshold()
+                .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+                .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '#ff7aff', '#fac9fa', '#ffffff']);
+
+            var opacityScale = d3.scaleThreshold()
+                .domain([0, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]);
+
+            // Load external data and boot
+
+            d3.queue()
+                .defer(d3.json, "../geojson/level0.geojson")
+                .defer(d3.json, "../geojson/level1.geojson")
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.RoomNumber, +d.co2ppm); })
+                .await(ready);
+
+            function ready(error, level0, level1) {
+                if (error) {
+                    console.log(error);
+                };
+
+                // Draw Level0 map
+
+                svg.append("g")
+                    .attr("class", "level0")
+                    .selectAll("path")
+                    .data(level0.features)
+                    .enter()
+                    .append("path")
+                    // draw each room
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 0)
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    })
+                    .attr("fill", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    });
+
+                // Draw Level1 map
+
+                svg.append("g")
+                    .attr("class", "level1")
+                    .selectAll("path")
+                    .data(level1.features)
+                    .enter()
+                    .append("path")
+                    // draw each room
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 0)
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    })
+                    .attr("fill", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    });
+            }
+
+            var l0_Checkbox = document.querySelector('input[id="l0_toggle"]');
+            var l1_Checkbox = document.querySelector('input[id="l1_toggle"]');
+
+            l0_Checkbox.onchange = function() {
+                if (this.checked) {
+                    d3.selectAll(".level0").attr("visibility", "visible");
+                } else {
+                    d3.selectAll(".level0").attr("visibility", "hidden");
+                }
+            };
+            l1_Checkbox.onchange = function() {
+                if (this.checked) {
+                    d3.selectAll(".level1").attr("visibility", "visible");
+                } else {
+                    d3.selectAll(".level1").attr("visibility", "hidden");
+                }
+            };
+            </script>
+            <!-- <script>
+            //------------------//
+            // Electrical Meter //
+            //------------------// 
+
+            // The svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map and projection
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 4])
+
+            d3.queue()
+                .defer(d3.json, "../geojson/grounds.geojson") 
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1224835953&single=true&output=csv") // Location and size
+                .await(ready);
+
+            function ready(error, dataGeo, data) {
+
+                // Add a scale for bubble size
+                var size = d3.scaleSqrt()
+                    .domain([1, 10000000]) // What's in the data
+                    .range([2, 30]) // Size in pixel
+
+                // Add circles:
+                setTimeout(function() {
+                    svg
+                        .selectAll("myCircles")
+                        .data(data.sort(function(a, b) { return +b.kWh - +a.kWh }).filter(function(d, i) { return i < 1000 }))
+                        .enter()
+                        .append("circle")
+                        .attr("class", "elecmeter")
+                        .attr("cx", function(d) { return projection([+d.lon, +d.lat])[0] })
+                        .attr("cy", function(d) { return projection([+d.lon, +d.lat])[1] })
+                        .attr("r", function(d) { return size(+d.kWh) })
+                        .style("fill", "red")
+                        .attr("stroke", "red")
+                        .attr("stroke-width", 4)
+                        .attr("fill-opacity", 0)
+                }, 1000);
+
+                var elec_Checkbox = document.querySelector('input[id="elec_toggle"]');
+
+                elec_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".elecmeter").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".elecmeter").attr("visibility", "hidden");
+                    }
+                };
+
+                svg
+                    .append("text")
+                    .attr("text-anchor", "end")
+                    .style("fill", "white")
+                    .attr("x", width - 480)
+                    .attr("y", height - 77)
+                    .attr("width", 90)
+                    .html("Annual Resource Use")
+                    .style("font-size", 14)
+                    .style("font-weight", "bold")
+
+                svg
+                    .append("text")
+                    .attr("text-anchor", "end")
+                    .style("fill", "white")
+                    .attr("x", width / 2)
+                    .attr("y", height / 2)
+                    .attr("width", 90)
+                    .html("×")
+                    .style("font-size", 14)
+                    .style("font-weight", "bold")
+
+                // Add legend: circles
+                var valuesToShow = [500000, 10000000]
+                var xCircle = 150
+                var xLabel = 200
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", xCircle)
+                    .attr("cy", function(d) { return height - size(d) - 2 })
+                    .attr("r", function(d) { return size(d) })
+                    .style("fill", "none")
+                    .attr("stroke-width", 4)
+                    .attr("stroke", "red")
+
+                // Add legend: segments
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("line")
+                    .attr('x1', function(d) { return xCircle + size(d) })
+                    .attr('x2', xLabel)
+                    .attr('y1', function(d) { return height - size(d) })
+                    .attr('y2', function(d) { return height - size(d) })
+                    .attr('stroke', 'white')
+                    .style('stroke-dasharray', ('2,2'))
+
+                // Add legend: labels
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("text")
+                    .attr('x', xLabel)
+                    .attr('y', function(d) { return height - size(d) })
+                    .text(function(d) { return d })
+                    .style("font-size", 12)
+                    .attr('fill', 'white')
+                    .attr('alignment-baseline', 'middle')
+
+            }
+            </script> -->
+            <!-- <script>
+            //-------------//
+            // Water Meter //
+            //-------------// 
+
+            // The svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map and projection
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 4])
+
+            d3.queue()
+                .defer(d3.json, "../geojson/grounds.geojson")
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1770914976&single=true&output=csv") // Location and size
+                .await(ready);
+
+            function ready(error, dataGeo, data) {
+
+                // Add a scale for bubble size
+                var size = d3.scaleSqrt()
+                    .domain([1, 2000000]) // What's in the data
+                    .range([2, 30]) // Size in pixel
+
+                // Add circles:
+                setTimeout(function() {
+                    svg
+                        .selectAll("myCircles")
+                        .data(data.sort(function(a, b) { return +b.gal - +a.gal }).filter(function(d, i) { return i < 1000 }))
+                        .enter()
+                        .append("circle")
+                        .attr("class", "h20meter")
+                        .attr("cx", function(d) { return projection([+d.lon, +d.lat])[0] })
+                        .attr("cy", function(d) { return projection([+d.lon, +d.lat])[1] })
+                        .attr("r", function(d) { return size(+d.gal) })
+                        .style("fill", "none")
+                        .attr("stroke", "blue")
+                        .attr("stroke-width", 4)
+                        .attr("fill-opacity", 1)
+                }, 1000);
+
+                var h20_Checkbox = document.querySelector('input[id="h20_toggle"]');
+
+                h20_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".h20meter").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".h20meter").attr("visibility", "hidden");
+                    }
+                };
+
+                // Add legend: circles
+                var valuesToShow = [100000, 2000000]
+                var xCircle = 365
+                var xLabel = 415
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", xCircle)
+                    .attr("cy", function(d) { return height - size(d) - 2 })
+                    .attr("r", function(d) { return size(d) })
+                    .style("fill", "none")
+                    .attr("stroke-width", 4)
+                    .attr("stroke", "blue")
+
+                // Add legend: segments
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("line")
+                    .attr('x1', function(d) { return xCircle + size(d) })
+                    .attr('x2', xLabel)
+                    .attr('y1', function(d) { return height - size(d) })
+                    .attr('y2', function(d) { return height - size(d) })
+                    .attr('stroke', 'white')
+                    .style('stroke-dasharray', ('2,2'))
+
+                // Add legend: labels
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("text")
+                    .attr('x', xLabel)
+                    .attr('y', function(d) { return height - size(d) })
+                    .text(function(d) { return d })
+                    .style("font-size", 12)
+                    .attr('fill', 'white')
+                    .attr('alignment-baseline', 'middle')
+            }
+            </script> -->
+           <!--  <script>
+            //-----------//
+            // Gas Meter //
+            //-----------// 
+
+            // The svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map and projection
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 4])
+
+            d3.queue()
+                .defer(d3.json, "../geojson/grounds.geojson") 
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1464833914&single=true&output=csv") // Location and size
+                .await(ready);
+
+            function ready(error, dataGeo, data) {
+
+                // Add a scale for bubble size
+                // var valueExtent = d3.extent(data, function(d) { return +d.kBTU; })
+                var size = d3.scaleSqrt()
+                    .domain([1, 100000000]) // What's in the data
+                    .range([2, 30]) // Size in pixel
+
+                // Add circles:
+                setTimeout(function() {
+                    svg
+                        .selectAll("myCircles")
+                        .data(data.sort(function(a, b) { return +b.kBTU - +a.kBTU }).filter(function(d, i) { return i < 1000 }))
+                        .enter()
+                        .append("circle")
+                        .attr("class", "gasmeter")
+                        .attr("cx", function(d) { return projection([+d.lon, +d.lat])[0] })
+                        .attr("cy", function(d) { return projection([+d.lon, +d.lat])[1] })
+                        .attr("r", function(d) { return size(+d.kBTU) })
+                        .style("fill", "none")
+                        .attr("stroke", "yellow")
+                        .attr("stroke-width", 4)
+                        .attr("fill-opacity", 0)
+                }, 1000);
+
+                var gas_Checkbox = document.querySelector('input[id="gas_toggle"]');
+
+                gas_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".gasmeter").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".gasmeter").attr("visibility", "hidden");
+                    }
+                };
+
+                // Add legend: circles
+                var valuesToShow = [5000000, 100000000]
+                var xCircle = 580
+                var xLabel = 630
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", xCircle)
+                    .attr("cy", function(d) { return height - size(d) - 2 })
+                    .attr("r", function(d) { return size(d) })
+                    .style("fill", "none")
+                    .attr("stroke-width", 4)
+                    .attr("stroke", "yellow")
+
+                // Add legend: segments
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("line")
+                    .attr('x1', function(d) { return xCircle + size(d) })
+                    .attr('x2', xLabel)
+                    .attr('y1', function(d) { return height - size(d) })
+                    .attr('y2', function(d) { return height - size(d) })
+                    .attr('stroke', 'white')
+                    .style('stroke-dasharray', ('2,2'))
+
+                // Add legend: labels
+                svg
+                    .selectAll("legend")
+                    .data(valuesToShow)
+                    .enter()
+                    .append("text")
+                    .attr('x', xLabel)
+                    .attr('y', function(d) { return height - size(d) })
+                    .text(function(d) { return d })
+                    .style("font-size", 12)
+                    .attr('fill', 'white')
+                    .attr('alignment-baseline', 'middle')
+            }
+            </script> -->
+            <script>
+            //----------------//
+            // Crowdsense CO2 //
+            //----------------// 
+
+            // The svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map and projection
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 4])
+
+            // create a tooltip
+                var Tooltip = d3.select("#my_dataviz")
+                  .append("div")
+                  .attr("class", "tooltip")
+                  .style("opacity", 1)
+                  .style("background-color", "white")
+                  .style("border", "solid")
+                  .style("border-width", "2px")
+                  .style("border-radius", "5px")
+                  .style("padding", "5px")
+            
+                // Three function that change the tooltip when user hover / move / leave a cell
+                var mouseover = function(d) {
+                  Tooltip.style("opacity", 1)
+                }
+                var mousemove = function(d) {
+                  Tooltip
+                    .html(d.Timestamp+ "<br>" + "long: " + d.lon + "<br>" + "lat: " + d.lat)
+                    .style("left", (d3.mouse(this)[0]+10) + "px")
+                    .style("top", (d3.mouse(this)[1]) + "px")
+                }
+                var mouseleave = function(d) {
+                  Tooltip.style("opacity", 0)
+                }
+
+            d3.queue()
+                .defer(d3.json, "../geojson/schoolgrounds.geojson") // Property shape
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pub?gid=768142103&single=true&output=csv") // Position of circles; sensor data
+                .await(ready);
+
+            function ready(error, dataGeo, data) {
+
+                // Create a color scale
+                var color = d3.scaleThreshold()
+                    .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+                    .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '#ff7aff', '#fac9fa', '#ffffff']);
+                
+                var opacityScale = d3.scaleThreshold()
+                .domain([1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]);
+
+                // Add circles:
+                setTimeout(function() {
+                    svg
+                        .selectAll("circle")
+                        .data(data.sort(function(a, b) { return +b.CO2ppm - +a.CO2ppm }).filter(function(d, i) { return i < 10 }))
+                        .enter()
+                        .append("circle")
+                        .attr("class", "crowdco2meter")
+                        .attr("cx", function(d) { return projection([+d.lon, +d.lat])[0] })
+                        .attr("cy", function(d) { return projection([+d.lon, +d.lat])[1] })
+                        .attr("r", 5)
+                        .style("fill", function(d) { return color(d.CO2ppm) })
+                        .style("fill-opacity", function(d) { return opacityScale(d.CO2ppm) })
+                        .attr("stroke", "black")
+                        .attr("stroke-width", 0)
+                        .on("mouseover", mouseover)
+                        .on("mousemove", mousemove)
+                        .on("mouseleave", mouseleave)
+                }, 1000);
+
+                var crowdco2_Checkbox = document.querySelector('input[id="crowdco2_toggle"]');
+
+                crowdco2_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".crowdco2meter").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".crowdco2meter").attr("visibility", "hidden");
+                    }
+                };
+
+            }
+            </script>
+            <!-- <script>
+            //-------------------//
+            // ENTRANCES & TREES //
+            //-------------------// 
+
+            // The svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map and projection
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 4])
+
+            d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.898706,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.89871031345968,-122.29457437992);node%5B%22natural%22=%22tree%22%5D(37.888334561756,-122.29644656181,37.89871031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
+
+            // d3.xml("entrance-exit.xml", function ready(error, xml) {
+           
+            svg
+                .selectAll("circle")
+                .data(xml.documentElement.getElementsByTargName("node"))
+                .enter()
+                .insert("circle")
+                .each(function (d) {
+                    const projected = projection([
+                    d.getAttribute("lon"),
+                    d.getAttribute("lat"),
+                ]);
+            d3.select(this).attr("cx", projected[0]).attr("cy", projected[1]);
+                }) 
+                .attr("r", 8)
+                .style("fill", "blue")
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("fill-opacity", 1)
+                .attr("class", "entries")
+            
+                var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
+
+                entries_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".entries").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".entries").attr("visibility", "hidden");
+                    }
+                };
+
+           })
+
+            </script> -->
+            
+   </div>
+    <!-- CO2 Gradient Key -->
+    <div id="gradient">
+        <svg width="600" height="92.26" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" version="1.1" viewBox="0 0 900 92.26" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" >
+            <g transform="matrix(.080736 0 0 .074478 -75.283 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#340040" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 -17.175 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#0000b1" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 40.933 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#002fdd" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 99.042 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#008add" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 157.15 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#00aa88" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 215.26 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#00d700" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 273.37 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#bcff00" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 331.47 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#f1e700" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 389.58 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#ffb500" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 447.69 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#ff5400" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 505.8 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#ff0000" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 563.91 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#ff3882" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 622.01 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#ff7aff" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 680.12 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#fac9fa" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.080736 0 0 .074478 738.23 -331.99)">
+                <rect x="1180.2" y="4792.8" width="575.78" height="624.17" fill="#ffffff" fill-opacity=".5" />
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 -198.01 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">100</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 -198.34 -880.27)" fill="#ffffff" font-size="100px">
+                <text x="1144.76" y="4545.8599" font-family="Proxima Nova, Montserrat, sans-serif" font-weight="700">CO</text>
+                <text x="1294.76" y="4545.8599" font-family="LucidaGrande-Bold, 'Lucida Grande', sans-serif" font-weight="600">₂</text>
+                <text x="1370.74" y="4545.8599" font-family="Proxima Nova, Montserrat, sans-serif" font-weight="700">PPM</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 -139.4 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">200</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 -81.802 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">300</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 -23.885 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">400</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 33.907 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">500</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 91.973 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">600</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 150.27 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">700</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 208.34 -802.58)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">800</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 266.29 -802.59)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">900</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 318.48 -802.59)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">1000</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 376.26 -802.59)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">1<tspan x="1194.86 1250.47" y="4545.8599 4545.8599">10</tspan>0</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 434.05 -802.59)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">1200</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 492.78 -802.57)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">1300</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 550.78 -802.59)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">1400</text>
+            </g>
+            <g transform="matrix(.19679 0 0 .19679 609.92 -802.59)">
+                <text x="1144.76" y="4545.8599" fill="#ffffff" font-family="Proxima Nova, Montserrat, sans-serif" font-size="100px" font-weight="700">1500</text>
+            </g>
+        </svg>
+        </div>
+    
+        <!-- <div id="toggleContainer2" style="transform: 15%, 100%; table-layout: fixed; width: 600px; ">
+            <table class="resources" style="font-size: .85em;">
+                <tr>
+                    <td>kWh - 2021 Electrical</td>
+                    <td>gal - 2021 Water</td>
+                    <td>kBTU - 2021 Gas</td>
+                </tr>
+                <tr>
+                    <td><label class="switch">
+                            <input id="elec_toggle" type="checkbox" checked>
+                            <div class="slider elec"></div>
+                        </label></td>
+              
+                    <td><label class="switch">
+                            <input id="h20_toggle" type="checkbox" checked>
+                            <div class="slider h20"></div>
+                        </label></td>
+                
+                    <td><label class="switch">
+                            <input id="gas_toggle" type="checkbox" checked>
+                            <div class="slider gas"></div>
+                        </label></td>
+                </tr>
+            </table>
+        </div> -->
+</body>
+
