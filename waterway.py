@@ -5,10 +5,7 @@ api = overpass.API(timeout=1500)
 
 # api.get returns a FeatureCollection
 res = api.get("""
-  area(id:3602999142);
-  (
-    nwr["waterway"](area);
-  ); 
+ nwr["waterway"](37.881364,-122.329245,37.904963,-122.258104);
 """, verbosity='geom')
 
 # dump as a geojson file
