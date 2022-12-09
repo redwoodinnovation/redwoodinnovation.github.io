@@ -5,7 +5,7 @@ api = overpass.API(timeout=500)
 
 # api.get already returns a FeatureCollection
 res = api.get("""
-    area(id:3602999142);  (
+    area(id:3600396499);  (
     way["service"](area);
   ); 
 """, verbosity='geom')

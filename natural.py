@@ -1,11 +1,11 @@
 import overpass
 import geojson
 
-api = overpass.API(timeout=500)
+api = overpass.API(timeout=1000)
 
 # api.get returns a FeatureCollection
 res = api.get("""
-    area(id:3602999142);
+    area(id:3600396499);
     nwr["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](area);
 """, verbosity='geom')
 

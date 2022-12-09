@@ -5,7 +5,7 @@ api = overpass.API(timeout=1500)
 
 # api.get returns a FeatureCollection
 res = api.get("""
-  area(id:3602999142);
+  area(id:3600396499);
   (
     node["amenity"="fountain"](area);
   ); 

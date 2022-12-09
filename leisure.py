@@ -5,7 +5,7 @@ api = overpass.API(timeout=500)
 
 # api.get returns a FeatureCollection. Here, leisure=garden is excluded (is included at garden.py)
 res = api.get("""
-  area(id:3602999142);
+  area(id:3600396499);
   (
     way["leisure"]["leisure"!~"garden"](area);
   ); 
