@@ -1,4 +1,4 @@
-name: Scheduled overpass api query for school grounds
+name: Waterway overpass api query
 
 on:
   schedule:

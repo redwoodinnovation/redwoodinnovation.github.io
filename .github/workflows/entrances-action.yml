@@ -1,4 +1,4 @@
-name: Scheduled overpass api query for highways
+name: Entrances overpass api query
 
 on:
   schedule:

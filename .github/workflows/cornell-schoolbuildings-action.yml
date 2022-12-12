@@ -1,4 +1,4 @@
-name: Scheduled overpass api query for school buildings 
+name: Scheduled overpass api query for Cornell school buildings 
 
 on:
   schedule:
@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: execute py script
-        run: python schoolbuildings.py
+        run: python cornell-schoolbuildings.py
 
       - name: commit files
         run: |
