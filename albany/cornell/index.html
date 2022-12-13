@@ -154,7 +154,7 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "../../geojson/grid.geojson")
+                .defer(d3.json, "../geojson/grid.geojson")
                 .defer(d3.json, "../../geojson/highways.geojson")
                 .defer(d3.json, "../../geojson/service.geojson")
                 .defer(d3.json, "../../geojson/garden.geojson")
@@ -166,11 +166,11 @@
                 .defer(d3.json, "../../geojson/landuse.geojson")
                 .defer(d3.json, "../../geojson/natural.geojson")
                 .defer(d3.json, "../../geojson/entrances.geojson")
-                .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=1526174802&single=true&output=tsv")
+                // .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=1526174802&single=true&output=tsv")
                 .await(ready);
 
-            // function ready(error, grid, highways, service, garden, leisure, water, barrier, landuse, natural, entrances, trees) {
-            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances, trees) {
+            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances) {
+            // function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances, trees) {
 
                 // Draw the grid 
                 svg.append("g")
@@ -322,20 +322,20 @@
                     .attr("stroke-width", 2)
                     .attr("fill-opacity", 0);
 
-                // Draw trees 
-                svg.append("g")
-                    .selectAll("path")
-                    .data(trees.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "#006400")
-                    .attr("fill", "#006400")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1)
-                    .attr("class", "trees");
+                // // Draw trees 
+                // svg.append("g")
+                //     .selectAll("path")
+                //     .data(trees.features)
+                //     .enter()
+                //     .append("path")
+                //     .attr("d", d3.geoPath()
+                //         .projection(projection)
+                //     )
+                //     .attr("stroke", "#006400")
+                //     .attr("fill", "#006400")
+                //     .attr("stroke-width", 2)
+                //     .attr("fill-opacity", 1)
+                //     .attr("class", "trees");
 
                 // Draw entrances 
                 svg.append("g")
