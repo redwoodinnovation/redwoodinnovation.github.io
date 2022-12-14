@@ -5,8 +5,9 @@ api = overpass.API(timeout=500)
 
 # api.get returns a FeatureCollection. Here, highway=service is excluded (is included at service.py)
 res = api.get("""
-  area(id:3600396499);
-  way["highway"]["highway"!~"service"]["highway"!~"cycleway"](area); 
+
+  way["highway"]["highway"!~"service"]["highway"!~"cycleway"](37.833333,-122.383333,37.9,-122.233611); 
+
 """, verbosity='geom')
 
 # dump as a geojson file

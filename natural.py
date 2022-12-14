@@ -5,8 +5,12 @@ api = overpass.API(timeout=1000)
 
 # api.get returns a FeatureCollection
 res = api.get("""
-    area(id:3600396499);
-    nwr["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](area);
+
+  (
+    node["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](37.833333,-122.383333,37.9,-122.233611);
+    way["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](37.833333,-122.383333,37.9,-122.233611);
+  );
+
 """, verbosity='geom')
 
 # dump as a geojson file

@@ -5,10 +5,9 @@ api = overpass.API(timeout=1500)
 
 # api.get returns a FeatureCollection
 res = api.get("""
-  area(id:3600396499);
-  (
-    node["amenity"="fountain"](area);
-  ); 
+  
+    node["amenity"="fountain"](37.833333,-122.383333,37.9,-122.233611);
+
 """, verbosity='geom')
 
 # dump as a geojson file
