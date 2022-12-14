@@ -132,7 +132,99 @@
         </div>
         <div id="map">
             <svg id="my_dataviz" width="700" height="810"></svg>
-      
+            <script>
+            //---------//
+            // GROUNDS //
+            //---------// 
+
+            // Svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            // Map, projection, and centerpoint
+            var path = d3.geoPath();
+            var projection = d3.geoMercator()
+                .scale(11000000) // Zoom
+                .center([-122.295, 37.8987]) // Geolocated centerpoint
+                .translate([width / 3, height / 10]);
+
+            var data = d3.map();
+            var colorScale = d3.scaleThreshold()
+                .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
+                .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
+
+            var opacityScale = d3.scaleThreshold()
+                .domain([1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
+                .range([0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]);
+
+            // Load external data and boot
+            d3.queue()
+                .defer(d3.json, "../../geojson/schoolgrounds.geojson")
+                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.OSMID, +d.co2ppm); })
+                .await(ready);
+
+            function ready(error, schoolgrounds, topo) {
+            // function ready(error, grounds, schoolgrounds) {
+
+                // // Draw the property line 
+                // svg.insert("g")
+                //     .attr("class", "picarro")
+                //     .selectAll("path")
+                //     .data(grounds.features)
+                //     .enter()
+                //     .insert("path")
+                //     // draw each room
+                //     .attr("d", d3.geoPath()
+                //         .projection(projection)
+                //     )
+                //     .attr("stroke", "grey")
+                //     .attr("stroke-width", 2)
+                //     .attr("stroke-dasharray", "18,10,4,7,4,10")
+                //     // .attr("fill-opacity", function(d) {
+                //     //     d.total = data.get(d.id) || 0;
+                //     //     return opacityScale(d.total);
+                //     // }) 
+                //     .attr("fill-opacity", 0) 
+                //     .attr("fill", function(d) {
+                //         d.total = data.get(d.id) || 0;
+                //         return colorScale(d.total);
+                //     });
+            
+                // Draw the OSM grounds 
+                svg.insert("g")
+                    .attr("class", "picarro")
+                    .selectAll("path")
+                    .data(schoolgrounds.features)
+                    .enter()
+                    .insert("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "grey")
+                    .attr("stroke-width", 2)
+                    // .attr("fill-opacity", 0) 
+                    .attr("fill-opacity", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return opacityScale(d.total);
+                    }) 
+                    .attr("fill", function(d) {
+                        d.total = data.get(d.id) || 0;
+                        return colorScale(d.total);
+                    });
+            }
+
+            var picarro_Checkbox = document.querySelector('input[id="picarro_toggle"]');
+
+            picarro_Checkbox.onchange = function() {
+                if (this.checked) {
+                    d3.selectAll(".picarro").attr("visibility", "visible");
+                } else {
+                    d3.selectAll(".picarro").attr("visibility", "hidden");
+                }
+            };
+            
+            </script>      
             <script>
             //-------------------------------//
             // BACKGROUND OSM OBJECTS & GRID //
@@ -374,99 +466,7 @@
             }
 
             </script>
-            <script>
-            //---------//
-            // GROUNDS //
-            //---------// 
 
-            // Svg
-            var svg = d3.select("svg"),
-                width = +svg.attr("width"),
-                height = +svg.attr("height");
-
-            // Map, projection, and centerpoint
-            var path = d3.geoPath();
-            var projection = d3.geoMercator()
-                .scale(11000000) // Zoom
-                .center([-122.295, 37.8987]) // Geolocated centerpoint
-                .translate([width / 3, height / 10]);
-
-            var data = d3.map();
-            var colorScale = d3.scaleThreshold()
-                .domain([99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500])
-                .range(['#000000', '#340040', '#0000b1', '#002fdd', '#008add', '#00aa88', '#00d700', '#bcff00', '#f1e700', '#ffb500', '#ff5400', '#ff0000', '#ff3882', '##ff7aff', '#fac9fa', '#ffffff']);
-
-            var opacityScale = d3.scaleThreshold()
-                .domain([1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300])
-                .range([0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1, 1]);
-
-            // Load external data and boot
-            d3.queue()
-                .defer(d3.json, "../../geojson/schoolgrounds.geojson")
-                .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pub?gid=1809780250&single=true&output=csv", function(d) { data.set(d.OSMID, +d.co2ppm); })
-                .await(ready);
-
-            function ready(error, schoolgrounds, topo) {
-            // function ready(error, grounds, schoolgrounds) {
-
-                // // Draw the property line 
-                // svg.insert("g")
-                //     .attr("class", "picarro")
-                //     .selectAll("path")
-                //     .data(grounds.features)
-                //     .enter()
-                //     .insert("path")
-                //     // draw each room
-                //     .attr("d", d3.geoPath()
-                //         .projection(projection)
-                //     )
-                //     .attr("stroke", "grey")
-                //     .attr("stroke-width", 2)
-                //     .attr("stroke-dasharray", "18,10,4,7,4,10")
-                //     // .attr("fill-opacity", function(d) {
-                //     //     d.total = data.get(d.id) || 0;
-                //     //     return opacityScale(d.total);
-                //     // }) 
-                //     .attr("fill-opacity", 0) 
-                //     .attr("fill", function(d) {
-                //         d.total = data.get(d.id) || 0;
-                //         return colorScale(d.total);
-                //     });
-            
-                // Draw the OSM grounds 
-                svg.insert("g")
-                    .attr("class", "picarro")
-                    .selectAll("path")
-                    .data(schoolgrounds.features)
-                    .enter()
-                    .insert("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "grey")
-                    .attr("stroke-width", 2)
-                    // .attr("fill-opacity", 0) 
-                    .attr("fill-opacity", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return opacityScale(d.total);
-                    }) 
-                    .attr("fill", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return colorScale(d.total);
-                    });
-            }
-
-            var picarro_Checkbox = document.querySelector('input[id="picarro_toggle"]');
-
-            picarro_Checkbox.onchange = function() {
-                if (this.checked) {
-                    d3.selectAll(".picarro").attr("visibility", "visible");
-                } else {
-                    d3.selectAll(".picarro").attr("visibility", "hidden");
-                }
-            };
-            
-            </script>
             <script>
             //----------------------//
             // SCHOOL BUILDINGS MAX //
