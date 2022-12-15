@@ -502,27 +502,38 @@
 
             function ready(error, topo) {
                 
-                // Draw the buildings 
-                svg.append("g")
-                    .attr("class", "building_max")
-                    .selectAll("path")
-                    .data(topo.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "grey")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 0)
-                    // .attr("fill-opacity", function(d) {
-                    //     d.total = data.get(d.id) || 0;
-                    //     return opacityScale(d.total);
-                    // }) 
-                    .attr("fill", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return colorScale(d.total);
-                    });
+            // Draw the building outlines
+            svg.append("g")
+                // .attr("class", "building_max")
+                .selectAll("path")
+                .data(topo.features)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath()
+                    .projection(projection)
+                )
+                .attr("stroke", "grey")
+                .attr("stroke-width", 2)
+                .attr("fill-opacity", 0);
+            // Draw the building fill
+            svg.append("g")
+                .attr("class", "building_max")
+                .selectAll("path")
+                .data(topo.features)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath()
+                    .projection(projection)
+                )
+                .attr("stroke-width", 0)
+                .attr("fill", function(d) {
+                    d.total = data.get(d.id) || 0;
+                    return colorScale(d.total);
+                })
+                .attr("fill-opacity", function(d) {
+                    d.total = data.get(d.id) || 0;
+                    return opacityScale(d.total);
+                });
             }
 
             var building_Checkbox = document.querySelector('input[id="building_toggle_max"]');

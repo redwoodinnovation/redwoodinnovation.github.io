@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div style="float: right">
+    <div>
         <div style="display: inline-block">
             <h1>CO<sub>2</sub> - Berkeley High School</h1>
             <table class="table" style="font-size: 0.85em;">
@@ -64,62 +64,7 @@
             });
             </script>
         </div>
-        <div style="display: inline-block">
-            <div>
-                <h1>CO<sub>2</sub> - Willard Middle School</h1>
-                <table class="table" style="font-size: 0.85em;">
-                    <thead>
-                        <tr id="tableHeader2">
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody2">
-                    </tbody>
-                </table>
-                <script>
-                    function createDataElement(htmlTag, innerText, idParent) {
-                let node = document.createElement(htmlTag);
-                let textnode = document.createTextNode(innerText);
-                node.appendChild(textnode);
-                document.getElementById(idParent).appendChild(node);
-                }
-                
-                function createHeaderElement(columnText) {
-                createDataElement("th", columnText, "tableHeader2");
-                }
-                
-                function createCellData(rowIndex, dataIndex, cellText) {
-                if(dataIndex === 0) {
-                let node = document.createElement("tr");
-                node.setAttribute("id", "row" + rowIndex);
-                document.getElementById("tableBody2").appendChild(node);
-                
-                createDataElement("td", cellText, "row" + rowIndex);
-                } else {
-                createDataElement("td", cellText, "row" + rowIndex);
-                }
-                }
-                
-                Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vRg72CoHJy60_V9F0wA6S_yOUR2jsag1D9yjEFIYgqDZ2JqvUggXgh0uDGLHRaZNQ-8WUV9AxtQPzAT/pub?gid=1180288724&single=true&output=csv', {
-                header: false,
-                download: true,
-                complete: function(results) {
-                for(let i = 0; i < results.data.length; i++) {
-                if(i === 0) {
-                for(let j = 0; j < results.data[i].length; j++) {
-                createHeaderElement(results.data[i][j]);
-                }
-                }
-                if(i > 0) {
-                for(let j = 0; j < results.data[i].length; j++) {
-                createCellData(i, j, results.data[i][j]);
-                }
-                }
-                }
-                }
-                });
-                </script>
-            </div>
-        </div>
+        
         <div id="toggleContainer">
             <table style="font-size: .85em;">
                 <tr>
@@ -533,7 +478,7 @@
 
             // Draw the building outlines
             svg.append("g")
-                .attr("class", "building_max")
+                // .attr("class", "building_max")
                 .selectAll("path")
                 .data(topo.features)
                 .enter()

@@ -495,33 +495,44 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "../../geojson/schoolbuildings.geojson")
+                .defer(d3.json, "../geojson/schoolbuildings.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MaxRoomCO2, +d.MinRoomCO2); })
                 .await(ready);
 
             function ready(error, topo) {
                 
-                // Draw the buildings 
-                svg.append("g")
-                    .attr("class", "building_max")
-                    .selectAll("path")
-                    .data(topo.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "grey")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 0)
-                    // .attr("fill-opacity", function(d) {
-                    //     d.total = data.get(d.id) || 0;
-                    //     return opacityScale(d.total);
-                    // }) 
-                    .attr("fill", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return colorScale(d.total);
-                    });
+                // Draw the building outlines
+            svg.append("g")
+                // .attr("class", "building_max")
+                .selectAll("path")
+                .data(topo.features)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath()
+                    .projection(projection)
+                )
+                .attr("stroke", "grey")
+                .attr("stroke-width", 2)
+                .attr("fill-opacity", 0);
+            // Draw the building fill
+            svg.append("g")
+                .attr("class", "building_max")
+                .selectAll("path")
+                .data(topo.features)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath()
+                    .projection(projection)
+                )
+                .attr("stroke-width", 0)
+                .attr("fill", function(d) {
+                    d.total = data.get(d.id) || 0;
+                    return colorScale(d.total);
+                })
+                .attr("fill-opacity", function(d) {
+                    d.total = data.get(d.id) || 0;
+                    return opacityScale(d.total);
+                });
             }
 
             var building_Checkbox = document.querySelector('input[id="building_toggle_max"]');
@@ -1082,7 +1093,7 @@
                 }
 
             d3.queue()
-                .defer(d3.json, "../../geojson/schoolgrounds.geojson") // Property shape
+                .defer(d3.json, "../geojson/schoolgrounds.geojson") // Property shape
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pub?gid=768142103&single=true&output=csv") // Position of circles; sensor data
                 .await(ready);
 
