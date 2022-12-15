@@ -43,7 +43,7 @@ A GitHub classroom ventilation prediction webpage displaying:
 
 ## Instructions
 
-- After customer has circled facilities, arcsecond registered bounding boxes are determined which capture the areas. These bounding boxes are the districts of interest for the overpass api queries, and are viewable as purple rectangles in the [Albany - Berkeley Map](https://redwoodinnovation.github.io/albany-berkeley). 
+- After customer has circled facilities, arcsecond registered bounding boxes are determined which capture the areas. These bounding boxes are the districts of interest for the overpass api queries, and are displayed as purple rectangles in the [Albany - Berkeley Map](https://redwoodinnovation.github.io/albany-berkeley). 
 
 - Individual school grounds (amenity=school) polygons are used as bounding boxes for the building tag api and indoor tag api. 
 
