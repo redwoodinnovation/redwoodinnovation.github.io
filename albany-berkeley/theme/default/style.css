@@ -44,8 +44,8 @@ table {
   font-size: .9em;
   text-align: left;
   color: white;
-  top: 100px; 
-  left: 40px;
+  top: 670px; 
+  left: 50px;
   right: 0;
   bottom: 0;
   z-index: 3; 
@@ -61,8 +61,8 @@ table {
   text-align: right;
   text-size:  .9em;
   position: absolute;
-  top:  250px;
-  left: 10px; 
+  top:  -400px;
+  left: 0px; 
   z-index: 4;
 }
 
