@@ -146,7 +146,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -240,14 +240,14 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "../../geojson/grid.geojson")
+                .defer(d3.json, "../../geojson/albanyhighgrat1arcsecond.geojson")
                 .defer(d3.json, "../../geojson/highways.geojson")
                 .defer(d3.json, "../../geojson/service.geojson")
                 .defer(d3.json, "../../geojson/garden.geojson")
@@ -482,7 +482,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -561,7 +561,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -644,7 +644,7 @@
             var path = d3.geoPath();
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 10]);
 
             var data = d3.map();
@@ -747,7 +747,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.queue()
@@ -868,7 +868,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.queue()
@@ -966,7 +966,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.queue()
@@ -1065,7 +1065,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             // create a tooltip
@@ -1154,7 +1154,7 @@
             // Map and projection
             var projection = d3.geoMercator()
                 .scale(14000000) // Zoom
-                .center([-122.2919, 37.8962]) // Geolocated centerpoint
+                .center([-122.2919, 37.8965]) // Geolocated centerpoint
                 .translate([width / 3, height / 4])
 
             d3.xml("//overpass-api.de/api/interpreter?data=%5Bbbox:37.8885,-122.2966,37.895906,-122.2945%5D;(node%5B%22entrance%22%5D(37.888334561756,-122.29644656181,37.89591031345968,-122.29457437992);node%5B%22natural%22=%22tree%22%5D(37.888334561756,-122.29644656181,37.89591031345968,-122.29457437992););out;>;out skel qt;", function ready(error, xml) {
