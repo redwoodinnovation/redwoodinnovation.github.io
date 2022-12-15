@@ -8,7 +8,7 @@ A GitHub classroom ventilation prediction webpage displaying:
 
 - Lines (ways), polygons (areas), and circles (nodes) which display OSM roads, paths, gardens, exercise facilities, and other features.
 
-- 1 Arcsecond Graticule (grid) definining a bounding box encompassing the school grounds.
+- 1 Arcsecond Graticule (grid) definining the bounding box encompassing the school grounds.
 
 ## CO2 Sensor Data
 
