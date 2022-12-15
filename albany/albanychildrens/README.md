@@ -14,7 +14,7 @@ A GitHub classroom ventilation prediction webpage displaying:
 
 - The Open Street Map school grounds (amenity=school) polygon displays the outside CO2 value per the CO2 color gradient. Data from 4pm, two days ago, is pulled into a Google Sheet via Google Apps Script each morning between 9 and 10 AM. Thease data are are stored in the "[Picarro 4PM](https://docs.google.com/spreadsheets/d/e/2PACX-1vT7Pfesayb3ZWqTwZC_tRmkTd_Q4xOb1LEumaloOSByqkxR_bCY5duYzvVfn8DuupaORpeKQ64zHzHR/pubhtml)" Google Sheet.
 
-<!-- - CO2 - Level 0 & Level 1 ppm values are shown per room polygon and are manually entered in the "[Cornell Room Sensors](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pubhtml?gid=1809780250&single=true)" Google Sheet. Fixed room sensor data may be at an hourly interval or reported as a max daily, weekly, or monthly value. ⟶
+<!-- - CO2 - Level 0 & Level 1 ppm values are shown per room polygon and are manually entered in the "[Cornell Room Sensors](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pubhtml?gid=1809780250&single=true)" Google Sheet. Fixed room sensor data may be at an hourly interval or reported as a max daily, weekly, or monthly value. -->
 
 - CO2 - Crowdsense mobile CO2 ppm values are entered with the "CO2 Crowdsense" Google Form wherein participants enter longitude, latitude, Level, and Room # (when applicable), and are stored in the "[CO2 Crowdsense (Responses)](https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pubhtml?gid=768142103&single=true)" Google Sheet.
 
