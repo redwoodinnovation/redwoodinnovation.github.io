@@ -1,11 +1,14 @@
 {
     "type": "FeatureCollection",
-    "features": [
+    "features":
+    [
         {
             "type": "Feature",
-            "geometry": {
+            "geometry":
+            {
                 "type": "Polygon",
-                "coordinates": [
+                "coordinates":
+                [
                     [
                         [
                             -122.296389,
@@ -30,8 +33,43 @@
                     ]
                 ]
             },
-            "properties": {},
+            "properties":
+            {},
             "id": "cornell"
+        },
+        {
+            "type": "Feature",
+            "properties":
+            {},
+            "geometry":
+            {
+                "type": "Polygon",
+                "coordinates":
+                [
+                    [
+                        [
+                            -122.272778,
+                            37.869167
+                        ],
+                        [
+                            -122.27,
+                            37.869167
+                        ],
+                        [
+                            -122.27,
+                            37.865
+                        ],
+                        [
+                            -122.272778,
+                            37.865
+                        ],
+                        [
+                            -122.272778,
+                            37.869167
+                        ]
+                    ]
+                ]
+            }
         }
     ]
 }
