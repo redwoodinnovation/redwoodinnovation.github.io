@@ -166,14 +166,15 @@
                 .defer(d3.json, "../geojson/landuse.geojson")
                 .defer(d3.json, "../geojson/natural.geojson")
                 .defer(d3.json, "../geojson/entrances.geojson")
+                .defer(d3.json, "../geojson/detailgrids.geojson")
                 .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=1526174802&single=true&output=tsv")
                 .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=168493240&single=true&output=tsv")
                 .defer(d3.json, "https://docs.google.com/spreadsheets/d/e/2PACX-1vRkrP0uf-UYTYsRSbawUWMvpbzu3tJJ1YGKv-y3Vbd8GLSJmzGSKyLabpzzw7x0oXasDpLTTAKAS16j/pub?gid=1652200859&single=true&output=tsv")
                 .await(ready);
 
-            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances, treesa, treesb, treesc) {
+            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances, detailgrids, treesa, treesb, treesc) {
 
-                // Draw the grid 
+                // Draw the arcminute grid 
                 svg.append("g")
                     .selectAll("path")
                     .data(grid.features)
@@ -322,6 +323,35 @@
                     .attr("stroke-width", 2)
                     .attr("fill-opacity", 0);
 
+               // Draw entrances 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(entrances.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke", "blue")
+                    .attr("fill", "blue")
+                    .attr("stroke-width", 2)
+                    .attr("fill-opacity", 1)
+                    .attr("class", "entries");
+
+                // Draw the detail grids 
+                svg.append("g")
+                    .selectAll("path")
+                    .data(detailgrids.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", d3.geoPath()
+                        .projection(projection)
+                    )
+                    .attr("stroke-dasharray", "2")
+                    .attr("stroke", "#FF5E00")
+                    .attr("stroke-width", 3)
+                    .attr("fill-opacity", 0);
+
                 // Draw treesa 
                 svg.append("g")
                     .selectAll("path")
@@ -367,20 +397,7 @@
                     .attr("fill-opacity", 1)
                     .attr("class", "trees");
 
-                // Draw entrances 
-                svg.append("g")
-                    .selectAll("path")
-                    .data(entrances.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", d3.geoPath()
-                        .projection(projection)
-                    )
-                    .attr("stroke", "blue")
-                    .attr("fill", "blue")
-                    .attr("stroke-width", 2)
-                    .attr("fill-opacity", 1)
-                    .attr("class", "entries");
+ 
             
                 var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
                 var trees_Checkbox = document.querySelector('input[id="trees_toggle"]');
@@ -525,7 +542,7 @@
 
             // Load external data and boot
             d3.queue()
-                .defer(d3.json, "geojson/schoolbuildings.geojson")
+                .defer(d3.json, "../geojson/schoolbuildings.geojson")
                 .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MaxRoomCO2, +d.MinRoomCO2); })
                 .await(ready);
 
