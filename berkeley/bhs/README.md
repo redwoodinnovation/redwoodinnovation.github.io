@@ -1,6 +1,6 @@
-# Berkely High School 
+# Berkeley High School 
 
-A GitHub classroom ventilation prediction webpage displaying:
+A GitHub webpage displaying:
 
 - Polygons (areas) which change color and opacity in response to changes in "Cornell Room Sensors" or "Picarro 4PM" Google Sheet values.
 
@@ -22,10 +22,9 @@ A GitHub classroom ventilation prediction webpage displaying:
 
 - Supersite MET 4PM environmental data (Pressure, Rainfall, Relative Humidity, Tempurature, Wind Direction, & Wind Speed) are pulled into a Google Sheet via Google Apps Script each day. These data are stored in the "[MET 4PM](https://docs.google.com/spreadsheets/d/1LAOdb-N3kTR97rE1fF7k4dGDyB9jhhNuM-PmiYYi3wo/edit#gid=0)" Google Sheet and are displayed on the webpage as a table. The [Papa Parse](https://www.papaparse.com) library is used to parse the csv data which is queried from the google sheet.
 
-## Resource Data
+## Resource Data (Hidden in the current GitHub website)
 
-- Electricity (kWh), natural gas (kBTU), and water (gal) are manually entered with the "Meter Reading Form" Google Form and are displayed as a circle node which changes size.
-	- Note: Hidden in the current GitHub website.
+- RED electricity (kWh), YELLOW natural gas (kBTU), and BLUE water (gal) are manually entered with the "Meter Reading Form" Google Form and are displayed as a circle node which changes size 
 
 ## Geometry
 
@@ -41,7 +40,7 @@ A GitHub classroom ventilation prediction webpage displaying:
 
 - Layer toggles are html + css.
 
-## Instructions
+## Setup
 
 - After customer has circled facilities, arcsecond registered bounding boxes are determined which capture the areas. These bounding
 boxes are the districts of interest for the overpass api queries, and are displayed as purple rectangles in the [Albany - Berkeley Map](redwoodinnovation.github.io/albany-berkeley).
