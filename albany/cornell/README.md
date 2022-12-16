@@ -1,50 +1,53 @@
 # Cornell Elementary School 
 
-A GitHub classroom ventilation prediction webpage displaying:
+A GitHub webpage displaying:
 
-- Polygons (areas) which change color and opacity in response to changes in "Cornell Room Sensors" or "Picarro 4PM" Google Sheet values.
+- Polygons (areas) which change color and opacity in response to changes in CO2 per Google Sheet values
 
-- Circles (nodes) showing individual entries in the "CO2 Crowdsense (Responses)" Google Sheet. 
+- Circles (nodes) showing individual entries in the "CO2 Crowdsense (Responses)" Google Form: https://forms.gle/PCoezqFKxv7PfModA
 
-- Lines (ways), polygons (areas), and circles (nodes) which display OSM roads, paths, gardens, exercise facilities, and other features.
+- Lines (ways), polygons (areas), and circles (nodes) which display OSM XML files as GoeJSON 
+	- roads, paths... 
+	- gardens
+	- ...
 
-- 1 Arcsecond Graticule (grid) definining the bounding box encompassing the school grounds.
+- 1 Arcsecond Graticule (grid) definining the bounding box encompassing the school grounds
 
 ## CO2 Sensor Data
 
-- The Open Street Map school grounds (amenity=school) polygon displays the outside CO2 value per the CO2 color gradient. Data from 4pm, two days ago, is pulled into a Google Sheet via Google Apps Script each morning between 9 and 10 AM. Thease data are are stored in the "[Picarro 4PM](https://docs.google.com/spreadsheets/d/e/2PACX-1vT7Pfesayb3ZWqTwZC_tRmkTd_Q4xOb1LEumaloOSByqkxR_bCY5duYzvVfn8DuupaORpeKQ64zHzHR/pubhtml)" Google Sheet.
+- The Open Street Map school grounds (amenity=school) polygon displays the outside CO2 value per the CO2 color gradient. Data from 4pm, two days ago, is pulled into a Google Sheet via Google Apps Script each morning between 9 and 10 AM. Thease data are are stored in the "[Picarro 4PM](https://docs.google.com/spreadsheets/d/e/2PACX-1vT7Pfesayb3ZWqTwZC_tRmkTd_Q4xOb1LEumaloOSByqkxR_bCY5duYzvVfn8DuupaORpeKQ64zHzHR/pubhtml)" Google Sheet
 
-- CO2 - Level 0 & Level 1 ppm values are shown per room polygon and are manually entered in the "[Cornell Room Sensors](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pubhtml?gid=1809780250&single=true)" Google Sheet. Fixed room sensor data may be at an hourly interval or reported as a max daily, weekly, or monthly value. 
+- CO2 - Level 0 & Level 1 ppm values are shown per room polygon and are manually entered in the "[Cornell Room Sensors](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-d_NzjzpbEVKq66-RUzki_3-oo_lPvFHGhuIrOnMY-VIigGVjP2b5OqIJcaYolE-z88vxhaOGumut/pubhtml?gid=1809780250&single=true)" Google Sheet. Fixed room sensor data may be at an hourly interval or reported as a max daily, weekly, or monthly value 
 
-- CO2 - Crowdsense mobile CO2 ppm values are entered with the "CO2 Crowdsense" Google Form wherein participants enter longitude, latitude, Level, and Room # (when applicable), and are stored in the "[CO2 Crowdsense (Responses)](https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pubhtml?gid=768142103&single=true)" Google Sheet.
+- CO2 - Crowdsense mobile CO2 ppm values are entered with the "CO2 Crowdsense" Google Form wherein participants enter longitude, latitude, Level, and Room # (when applicable), and are stored in the "[CO2 Crowdsense (Responses)](https://docs.google.com/spreadsheets/d/e/2PACX-1vTT1AN5PpyoMPB2_IjV4RfPVRZCGMUTQN_uBEA_pgf6NbrelQ6tntjiysCeECEOoXwc5RuDyaP1DCB-/pubhtml?gid=768142103&single=true)" Google Sheet
 
-- Indoor / Outdoor Max CO2 Differential, Mean Minimum CO2 Indoor, & Ventilation Prediction values are calculated in the [Max CO2 two days ago](https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing) Google Sheet. This data is combined with the Supersite MET 4PM data to form a table (see below).
+- Indoor / Outdoor Max CO2 Differential, Mean Minimum CO2 Indoor, & Ventilation Prediction values are calculated in the [Max CO2 two days ago](https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing) Google Sheet. This data is combined with the Supersite MET 4PM data to form a table (see below)
 
-- Supersite MET 4PM environmental data (Pressure, Rainfall, Relative Humidity, Tempurature, Wind Direction, & Wind Speed) are pulled into a Google Sheet via Google Apps Script each day. These data are stored in the "[MET 4PM](https://docs.google.com/spreadsheets/d/1LAOdb-N3kTR97rE1fF7k4dGDyB9jhhNuM-PmiYYi3wo/edit#gid=0)" Google Sheet and are displayed on the webpage as a table. The [Papa Parse](https://www.papaparse.com) library is used to parse the csv data which is queried from the google sheet.
+- Supersite MET 4PM environmental data (Pressure, Rainfall, Relative Humidity, Tempurature, Wind Direction, & Wind Speed) are pulled into a Google Sheet via Google Apps Script each day. These data are stored in the "[MET 4PM](https://docs.google.com/spreadsheets/d/1LAOdb-N3kTR97rE1fF7k4dGDyB9jhhNuM-PmiYYi3wo/edit#gid=0)" Google Sheet and are displayed on the webpage as a table. The [Papa Parse](https://www.papaparse.com) library is used to parse the csv data which is queried from the google sheet
 
-## Resource Data
+## Resource Data (hidden, but the code is fully functional and tested)
 
-- Electricity (kWh), natural gas (kBTU), and water (gal) are manually entered with the "Meter Reading Form" Google Form and are displayed as a circle node which changes size.
-	- Note: Hidden in the current GitHub website.
+- RED Electricity (kWh), YELLOW natural gas (kBTU), and BLUE water (gal) are manually entered with the Google Form: https://forms.gle/viUQDkJeoVu2a1rw6 
+- Circle node changes size
 
 ## Geometry
 
-- Map geometry, graticule, and dynamic color and opacity fills are rendered with d3.js.
+- Map geometry, graticule, and dynamic color and opacity fills are rendered with d3.js
 
 - OSM background key tag objects values are generated by overpass api queries bounded by the district of interest, converted to geojson, and stored in GitHub. The queries and subsequent conversions to geojson are called by python scripts which are triggered by a GitHub Action cron schedule daily.
-	- Natural=tree values are converted from nodes to 1/5 arcsecond geojson rectangles (approximately 20' × 20').
+	- Natural=tree values are converted from nodes to 1/5 arcsecond geojson rectangles (approximately 20' × 20')
 	
-- The property line polygon is a geojson file stored in GitHub.
-	- Note: Hidden in the current GitHub website.
+- The property line polygon is a geojson file stored in GitHub
+	- Note: Hidden in the current GitHub website
 
-- CO2 PPM color gradient SVG code is generated by Inkscape. 
+- CO2 PPM color gradient SVG code is generated by Inkscape 
 
-- Layer toggles are html + css.
+- Layer toggles are html + css
 
-## Instructions
+## Pre-Design Setup
 
-- After customer has circled facilities, arcsecond registered bounding boxes are determined which capture the areas. These bounding boxes are the districts of interest for the overpass api queries, and are displayed as purple rectangles in the [Albany - Berkeley Map](https://redwoodinnovation.github.io/albany-berkeley). 
+- After customer has circled facilities (shown below in red), Redwood Innovation creates arcsecond registered bounding boxes of the areas displayed as purple rectangles in the [Albany - Berkeley Map](https://redwoodinnovation.github.io/albany-berkeley) 
 
-- Individual school grounds (amenity=school) polygons are used as bounding boxes for the building tag api and indoor tag api. 
+- Individual school grounds (amenity=school) polygons are used as bounding boxes for the building tag api and indoor tag api 
 
 ![Albany School Grounds in overpass-turbo.eu](images/albany-school-grounds.png)
