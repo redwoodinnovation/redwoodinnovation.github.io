@@ -9,6 +9,7 @@ res = api.get("""
   (
     node["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](37.833333,-122.383333,37.9,-122.233611);
     way["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](37.833333,-122.383333,37.9,-122.233611);
+    relation["natural"]["natural"!~"tree"]["natural"!~"bay"]["natural"!~"coastline"]["natural"!~"water"]["natural"!~"wetland"](37.833333,-122.383333,37.9,-122.233611);
   );
 
 """, verbosity='geom')

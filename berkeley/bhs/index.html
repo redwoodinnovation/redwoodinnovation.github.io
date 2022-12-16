@@ -44,7 +44,7 @@
             }
             }
             
-            Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vRg72CoHJy60_V9F0wA6S_yOUR2jsag1D9yjEFIYgqDZ2JqvUggXgh0uDGLHRaZNQ-8WUV9AxtQPzAT/pub?gid=1180288724&single=true&output=csv', {
+            Papa.parse('https://docs.google.com/spreadsheets/d/e/2PACX-1vRg72CoHJy60_V9F0wA6S_yOUR2jsag1D9yjEFIYgqDZ2JqvUggXgh0uDGLHRaZNQ-8WUV9AxtQPzAT/pub?gid=1014389022&single=true&output=csv', {
             header: false,
             download: true,
             complete: function(results) {
@@ -75,7 +75,7 @@
                         </label></td>
                 </tr>
                 <tr>
-                    <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Max</a></td>
+                    <td>CO<sub>2</sub> - Buildings Max</td>
                     <td><label class="switch">
                             <input id="building_toggle_max" type="checkbox" checked="true" />
                             <div class="slider co2"></div>
@@ -124,6 +124,13 @@
                 <tr></tr>
                 <tr></tr>
                 <tr></tr>
+                <tr>
+                    <td>Barriers</td>
+                    <td><label class="switch">
+                            <input id="barriers_toggle" type="checkbox" checked>
+                            <div class="slider barriers"></div>
+                        </label></td>
+                </tr>
                 <tr>
                     <td>Entrances</td>
                     <td><label class="switch">
@@ -379,6 +386,7 @@
                 .data(barrier.features)
                 .enter()
                 .append("path")
+                .attr("class", "barriers")
                 .attr("d", d3.geoPath()
                     .projection(projection)
                 )
@@ -430,6 +438,7 @@
 
             var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
             var trees_Checkbox = document.querySelector('input[id="trees_toggle"]');
+            var barriers_Checkbox = document.querySelector('input[id="barriers_toggle"]');
             entries_Checkbox.onchange = function() {
                 if (this.checked) {
                     d3.selectAll(".entries").attr("visibility", "visible");
@@ -442,6 +451,13 @@
                     d3.selectAll(".trees").attr("visibility", "visible");
                 } else {
                     d3.selectAll(".trees").attr("visibility", "hidden");
+                }
+            };
+            barriers_Checkbox.onchange = function() {
+                if (this.checked) {
+                    d3.selectAll(".barriers").attr("visibility", "visible");
+                } else {
+                    d3.selectAll(".barriers").attr("visibility", "hidden");
                 }
             };
         }
@@ -471,7 +487,7 @@
         // Load external data and boot
         d3.queue()
             .defer(d3.json, "../geojson/schoolbuildings.geojson")
-            .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIJ4D0IlAPlTxx0Pl53G08mhSeDCpf-s2CGPuIMCRSFSd5TOur3eVnWyRmHm9CBJq9bHjqDR_60RLA/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MaxRoomCO2); })
+            .defer(d3.csv, "https://docs.google.com/spreadsheets/d/e/2PACX-1vTkannrzT4VpMrVJT0U9_oNOyl44B2SHzdOKe2rk7wVVnJjfYucw-dQVOHsuQkfnP1lM8_lKxUB45Tn/pub?gid=0&single=true&output=csv", function(d) { data.set(d.OSMID, +d.MaxRoomCO2); })
             .await(ready);
 
         function ready(error, topo) {

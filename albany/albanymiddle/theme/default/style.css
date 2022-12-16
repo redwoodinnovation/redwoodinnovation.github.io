@@ -89,6 +89,7 @@ table {
   position: absolute;
   top: 1040px;
   z-index: 4;
+  background-color: black;
 }
 
 /* The switch - the box around the slider */

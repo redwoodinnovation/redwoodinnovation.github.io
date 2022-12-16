@@ -1,15 +1,11 @@
 {
     "type": "FeatureCollection",
-    "features":
-    [
+    "features": [
         {
             "type": "Feature",
-            "id": 28005832,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.271064,
                         37.868852
@@ -128,8 +124,7 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "addr:housenumber": "1930",
                 "addr:postcode": "94704",
@@ -143,16 +138,14 @@
                 "website": "https://theaters.berkeleyschools.net/",
                 "wikidata": "Q4892000",
                 "wikipedia": "en:Berkeley Community Theater"
-            }
+            },
+            "id": 28005832
         },
         {
             "type": "Feature",
-            "id": 28005833,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.27057,
                         37.868112
@@ -315,23 +308,20 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "building": "school",
                 "building:levels": "2",
                 "name": "D Building",
                 "roof:levels": "0"
-            }
+            },
+            "id": 28005833
         },
         {
             "type": "Feature",
-            "id": 28005896,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.272404,
                         37.86795
@@ -394,22 +384,19 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "building": "school",
                 "building:levels": "3",
                 "name": "H Building"
-            }
+            },
+            "id": 28005896
         },
         {
             "type": "Feature",
-            "id": 28005897,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.271955,
                         37.867774
@@ -472,57 +459,19 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "building": "school",
                 "building:levels": "4",
                 "name": "C Building"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 28005898,
-            "geometry":
-            {
-                "type": "LineString",
-                "coordinates":
-                [
-                    [
-                        -122.272155,
-                        37.865795
-                    ],
-                    [
-                        -122.272202,
-                        37.865792
-                    ],
-                    [
-                        -122.272284,
-                        37.866492
-                    ],
-                    [
-                        -122.272236,
-                        37.866496
-                    ],
-                    [
-                        -122.272155,
-                        37.865795
-                    ]
-                ]
             },
-            "properties":
-            {
-                "building": "stands"
-            }
+            "id": 28005897
         },
         {
             "type": "Feature",
-            "id": 28005934,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.271311,
                         37.866697
@@ -581,22 +530,19 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "building": "gymnasium",
                 "leisure": "sports_centre",
                 "name": "Donahue Gym",
                 "sport": "basketball"
-            }
+            },
+            "id": 28005934
         },
         {
             "type": "Feature",
-            "id": 315996652,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.270629,
                         37.867084
@@ -667,109 +613,19 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "building": "school",
                 "building:levels": "3",
                 "name": "M Building",
                 "roof:levels": "0"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 421443244,
-            "geometry":
-            {
-                "type": "LineString",
-                "coordinates":
-                [
-                    [
-                        -122.270966,
-                        37.865912
-                    ],
-                    [
-                        -122.271235,
-                        37.865894
-                    ],
-                    [
-                        -122.271304,
-                        37.866536
-                    ],
-                    [
-                        -122.271034,
-                        37.866554
-                    ],
-                    [
-                        -122.270966,
-                        37.865912
-                    ]
-                ]
             },
-            "properties":
-            {
-                "building": "stands",
-                "name": "J Building"
-            }
+            "id": 315996652
         },
         {
             "type": "Feature",
-            "id": 421443251,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
-                    [
-                        -122.271427,
-                        37.865383
-                    ],
-                    [
-                        -122.27121,
-                        37.86541
-                    ],
-                    [
-                        -122.271224,
-                        37.865567
-                    ],
-                    [
-                        -122.271248,
-                        37.865566
-                    ],
-                    [
-                        -122.271276,
-                        37.865523
-                    ],
-                    [
-                        -122.271321,
-                        37.865478
-                    ],
-                    [
-                        -122.271372,
-                        37.86544
-                    ],
-                    [
-                        -122.271429,
-                        37.865405
-                    ],
-                    [
-                        -122.271427,
-                        37.865383
-                    ]
-                ]
-            },
-            "properties":
-            {
-                "building": "garage"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 523583535,
-            "geometry":
-            {
-                "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.27057,
                         37.868112
@@ -840,23 +696,20 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "building": "school",
                 "building:levels": "1",
                 "name": "E Building",
                 "roof:levels": "0"
-            }
+            },
+            "id": 523583535
         },
         {
             "type": "Feature",
-            "id": 523583536,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.272207,
                         37.867863
@@ -923,22 +776,19 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "building": "school",
                 "building:levels": "3",
                 "name": "G Building"
-            }
+            },
+            "id": 523583536
         },
         {
             "type": "Feature",
-            "id": 523583537,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.271947,
                         37.867705
@@ -961,19 +811,16 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "building": "bridge"
-            }
+            },
+            "id": 523583537
         },
         {
             "type": "Feature",
-            "id": 523583538,
-            "geometry":
-            {
+            "geometry": {
                 "type": "LineString",
-                "coordinates":
-                [
+                "coordinates": [
                     [
                         -122.272207,
                         37.867863
@@ -996,48 +843,13 @@
                     ]
                 ]
             },
-            "properties":
-            {
+            "properties": {
                 "addr:city": "Berkeley",
                 "building": "school",
                 "building:levels": "2",
                 "roof:levels": "0"
-            }
-        },
-        {
-            "type": "Feature",
-            "id": 1029113274,
-            "geometry":
-            {
-                "type": "LineString",
-                "coordinates":
-                [
-                    [
-                        -122.271064,
-                        37.865704
-                    ],
-                    [
-                        -122.271041,
-                        37.865524
-                    ],
-                    [
-                        -122.271148,
-                        37.865516
-                    ],
-                    [
-                        -122.271157,
-                        37.865597
-                    ],
-                    [
-                        -122.271064,
-                        37.865704
-                    ]
-                ]
             },
-            "properties":
-            {
-                "building": "yes"
-            }
+            "id": 523583538
         }
     ]
 }
