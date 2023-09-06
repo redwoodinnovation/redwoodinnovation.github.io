@@ -151,6 +151,24 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.slider.barriers {
+  border-radius: 34px;
+}
+
+.slider.barriers:before {
+  border-radius: 50%;
+  background-color: red;
+}
+
+.slider.entrances {
+  border-radius: 34px;
+}
+
+.slider.entrances:before {
+  border-radius: 50%;
+  background-color: blue;
+}
+
 .slider.elec {
   border-radius: 34px;
 }
