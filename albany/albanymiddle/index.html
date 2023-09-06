@@ -406,7 +406,7 @@
                     .attr("fill", "red")
                     .attr("stroke-width", 3)
                     .attr("fill-opacity", 0)
-                    .attr("class", "barriers");
+                    .attr("class", "barrier");
 
                 // Draw landuse 
                 svg.append("g")
@@ -458,9 +458,9 @@
 
                 entries_Checkbox.onchange = function() {
                     if (this.checked) {
-                        d3.selectAll(".barriers").attr("visibility", "visible");
+                        d3.selectAll(".barrier").attr("visibility", "visible");
                     } else {
-                        d3.selectAll(".barriers").attr("visibility", "hidden");
+                        d3.selectAll(".barrier").attr("visibility", "hidden");
                     }
                 };
                 
