@@ -67,7 +67,7 @@
 </div>
     <div id="toggleContainer">
             <table style="font-size: .85em;">
-                <tr>
+<!--                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/1i7I8GU8UnDoeGHtY4Pu45vd546xVyDjxp0Mxk5vXqFk/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Outdoor 4PM</a></td>
                     <td><label class="switch">
                             <input id="picarro_toggle" type="checkbox" checked="true" />
@@ -81,13 +81,13 @@
                             <div class="slider co2"></div>
                         </label></td>
                 </tr>
-               <!--  <tr>
+                <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/12QYvKsT0-vRnczJy0BhiOgzXRP7k7jFa4jGETXVmerg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Buildings Min</a></td>
                     <td><label class="switch">
                             <input id="building_toggle_min" type="checkbox" />
                             <div class="slider co2"></div>
                         </label></td>
-                </tr> -->
+                </tr>
                 <tr>
                     <td><a href="https://docs.google.com/spreadsheets/d/1MeorQLVcTYJvDqAk0-ao92_oRZRMafvHM9TD5T2yzMg/edit?usp=sharing" target="_blank">CO<sub>2</sub> - Rooms Level 1</a></td>
                     <td><label class="switch">
@@ -101,7 +101,7 @@
                             <input id="l0_toggle" type="checkbox" checked="true" />
                             <div class="slider co2"></div>
                         </label></td>
-                </tr>
+                </tr> -->
                 <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
                 <th>Crowdsense History</th>
                 <tr>
@@ -112,6 +112,13 @@
                         </label></td>
                 </tr>
                 <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+                <tr>
+                    <td>Barriers</td>
+                    <td><label class="switch">
+                            <input id="barriers_toggle" type="checkbox" checked>
+                            <div class="slider barriers"></div>
+                        </label></td>
+                </tr>
                 <tr>
                     <td>Entrances</td>
                     <td><label class="switch">
@@ -203,11 +210,11 @@
                     )
                     .attr("stroke", "grey")
                     .attr("stroke-width", 2)
-                    // .attr("fill-opacity", 0) 
-                    .attr("fill-opacity", function(d) {
-                        d.total = data.get(d.id) || 0;
-                        return opacityScale(d.total);
-                    }) 
+                    .attr("fill-opacity", 0) 
+                    // .attr("fill-opacity", function(d) {
+                    //     d.total = data.get(d.id) || 0;
+                    //     return opacityScale(d.total);
+                    // }) 
                     .attr("fill", function(d) {
                         d.total = data.get(d.id) || 0;
                         return colorScale(d.total);
