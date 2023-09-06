@@ -406,7 +406,8 @@
                     .attr("stroke", "red")
                     .attr("fill", "red")
                     .attr("stroke-width", 3)
-                    .attr("fill-opacity", 0);
+                    .attr("fill-opacity", 0)
+                    .attr("class", "barriers");
 
                 // Draw landuse 
                 svg.append("g")
@@ -451,10 +452,19 @@
                     .attr("stroke-width", 2)
                     .attr("fill-opacity", 1)
                     .attr("class", "entries");
-            
+
+                var barriers_Checkbox = document.querySelector('input[id="barriers_toggle"]');
                 var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
                 var trees_Checkbox = document.querySelector('input[id="trees_toggle"]');
 
+                entries_Checkbox.onchange = function() {
+                    if (this.checked) {
+                        d3.selectAll(".barriers").attr("visibility", "visible");
+                    } else {
+                        d3.selectAll(".barriers").attr("visibility", "hidden");
+                    }
+                };
+                
                 entries_Checkbox.onchange = function() {
                     if (this.checked) {
                         d3.selectAll(".entries").attr("visibility", "visible");
