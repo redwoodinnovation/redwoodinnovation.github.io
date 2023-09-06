@@ -142,6 +142,25 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
+.slider.barriers {
+  border-radius: 34px;
+}
+
+.slider.barriers:before {
+  border-radius: 50%;
+  background-color: red;
+}
+
+.slider.entrances {
+  border-radius: 34px;
+}
+
+.slider.entrances:before {
+  border-radius: 50%;
+  background-color: blue;
+}
+
+
 /* Rounded sliders */
 .slider.co2 {
   border-radius: 34px;
