@@ -169,15 +169,6 @@ input:checked + .slider:before {
   background-color: blue;
 }
 
-.slider.barriers {
-  border-radius: 34px;
-}
-
-.slider.barriers:before {
-  border-radius: 50%;
-  background-color: red;
-}
-
 .slider.elec {
   border-radius: 34px;
 }
