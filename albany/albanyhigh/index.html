@@ -270,7 +270,7 @@
                 .await(ready);
 
             // function ready(error, grid, highways, service, garden, leisure, water, barrier, landuse, natural, entrances, trees) {
-            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barrier, landuse, natural, entrances, trees) {
+            function ready(error, grid, highways, service, garden, leisure, water, waterway, fountain, barriers, landuse, natural, entrances, trees) {
 
                 // Draw the grid 
                 svg.append("g")
@@ -394,10 +394,10 @@
                     .attr("stroke-width", 2)
                     .attr("fill-opacity", 0);
 
-                // Draw barrier 
+                // Draw barriers
                 svg.append("g")
                     .selectAll("path")
-                    .data(barrier.features)
+                    .data(barriers.features)
                     .enter()
                     .append("path")
                     .attr("d", d3.geoPath()
@@ -457,7 +457,7 @@
                 var entries_Checkbox = document.querySelector('input[id="entries_toggle"]');
                 var trees_Checkbox = document.querySelector('input[id="trees_toggle"]');
 
-                entries_Checkbox.onchange = function() {
+                barriers_Checkbox.onchange = function() {
                     if (this.checked) {
                         d3.selectAll(".barriers").attr("visibility", "visible");
                     } else {
