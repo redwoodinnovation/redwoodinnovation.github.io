@@ -1,7 +1,7 @@
 # Albany Middle School 
 A GitHub webpage displaying:
-- Polygons (areas) representing rooms and buildings display color in reference to [Google Sheet name]().
-- Circles (nodes) representing individual entries display color in reference to [CO2 Crowdsense (Responses)](). 
+- Polygons (areas) representing rooms and buildings from OSM geojson which display color in reference to co2 level [Google Sheet name]().
+- Circles (nodes) representing public entries which display color in reference to the form sheet [CO2 Crowdsense (Responses)](https://docs.google.com/spreadsheets/d/1D4DeVEVcacgG_N9Oe2uMkp2ivCZdjjL2Fe1NE07ZDWw/edit?resourcekey#gid=1904790719). 
 - Lines (ways), polygons (areas), and circles (nodes) which display OSM roads, paths, gardens, exercise facilities, and other OSM features. 
 - Arcsecond Graticule (grid) overlay per our [USGS National Map Project](https://www.usgs.gov/programs/national-geospatial-program/national-map)
 - Bounding Box definining the bounding box encompassing the school grounds.
